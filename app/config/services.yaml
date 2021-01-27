@@ -1,0 +1,21 @@
+parameters:
+    app.stage: "%env(resolve:APP_STAGE)%"
+    aws.deployment.region: "%env(resolve:AWS_DEPLOYMENT_REGION)%"
+    app.name: "sushi-doctor" # Never change
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $appStage: '%app.stage%'
+            $appName: '%app.name%'
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+    App\Controller\:
+        resource: '../src/Controller/'
+        tags: ['controller.service_arguments']

@@ -1,0 +1,115 @@
+service: sushi-doctor # Never change
+useDotenv: true
+provider:
+  name: aws
+  region: ${env:AWS_DEPLOYMENT_REGION}
+  lambdaHashingVersion: 20201221
+  runtime: provided.al2
+  environment:
+    APP_ENV: ${env:APP_ENV}
+    APP_STAGE: ${env:APP_STAGE}
+    AWS_KEY: ${env:AWS_KEY}
+    AWS_SECRET: ${env:AWS_SECRET}
+    AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
+    APP_SECRET: ${env:APP_SECRET}
+    DATABASE_URL: ""
+plugins:
+  - ./vendor/bref/bref
+package:
+  exclude:
+    - node_modules/**
+    - tests/**
+    - var/log/**
+    - public/assets/**
+functions:
+  website:
+    handler: public/index.php
+    timeout: 28
+    layers:
+      - ${bref:layer.php-74-fpm}
+    events:
+      - httpApi: '*'
+  console:
+    handler: bin/console
+    timeout: 120
+    layers:
+      - ${bref:layer.php-74} # PHP Web
+      - ${bref:layer.console} # PHP Console
+resources:
+  Resources:
+    Assets:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: sushi-doctor-asset-${opt:stage}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders: [ "*" ]
+              AllowedMethods: [ GET ]
+              AllowedOrigins: [ "*" ]
+    AssetsBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: !Ref Assets # Ref for the bucket defined above
+        PolicyDocument:
+          Statement:
+            -   Effect: Allow
+                Principal: '*' # everyone
+                Action: 's3:GetObject' # to read
+                Resource: !Join ['/', [!GetAtt Assets.Arn, '*']] # things in the bucket # alternatively you can write out Resource: 'arn:aws:s3:::<bucket-name>/*'
+    WebsiteCDN:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Aliases:
+            - ${env:APP_DOMAIN} # sushi-doctor.com
+          ViewerCertificate:
+            AcmCertificateArn: ${env:APP_DOMAIN_CERTIFICATE}
+            SslSupportMethod: 'sni-only'
+            MinimumProtocolVersion: TLSv1.1_2016
+          Enabled: true
+          PriceClass: PriceClass_100
+          HttpVersion: http2
+          Origins:
+            -   Id: Website
+                DomainName: !Join ['.', [!Ref HttpApi, 'execute-api', !Ref AWS::Region, 'amazonaws.com']]
+                CustomOriginConfig:
+                  OriginProtocolPolicy: 'https-only' # API Gateway only supports HTTPS
+                OriginCustomHeaders:
+                  -   HeaderName: 'X-Forwarded-Host'
+                      HeaderValue: ${env:APP_DOMAIN}
+            -   Id: Assets
+                DomainName: !GetAtt Assets.RegionalDomainName
+                S3OriginConfig: {}
+          DefaultCacheBehavior:
+            AllowedMethods: [GET, HEAD, OPTIONS, PUT, POST, PATCH, DELETE]
+            TargetOriginId: Website
+            DefaultTTL: 0
+            MinTTL: 0
+            MaxTTL: 0
+            ForwardedValues:
+              QueryString: true
+              Cookies:
+                Forward: all
+              Headers:
+                - 'Accept'
+                - 'Accept-Encoding'
+                - 'Accept-Language'
+                - 'Authorization'
+                - 'Origin'
+                - 'Referer'
+            ViewerProtocolPolicy: redirect-to-https # Force https
+          CacheBehaviors:
+            -   PathPattern: 'assets/*' # Assets will be served under the `/assets/` prefix<
+                TargetOriginId: Assets # the static files on S3
+                AllowedMethods: [GET, HEAD]
+                ForwardedValues:
+                  QueryString: 'false'
+                  Cookies:
+                    Forward: none
+                ViewerProtocolPolicy: redirect-to-https
+                Compress: true
+          CustomErrorResponses: # Force CloudFront to not cache HTTP errors
+            -   ErrorCode: 500
+                ErrorCachingMinTTL: 0
+            -   ErrorCode: 504
+                ErrorCachingMinTTL: 0

@@ -1,0 +1,57 @@
+name: Deployment to AWS
+on:
+  push:
+    branches: [main, preprod, dev]
+defaults:
+  run:
+    working-directory: ./app
+jobs:
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    env:
+      AWS_KEY: ${{ secrets.AWS_KEY }}
+      AWS_SECRET: ${{ secrets.AWS_SECRET }}
+      AWS_DEPLOYMENT_REGION: ${{ secrets.AWS_DEPLOYMENT_REGION }}
+      APP_SECRET: ${{ secrets.APP_SECRET }}
+      APP_ENV: ${{ secrets.APP_ENV }}
+      APP_DOMAIN: ${{ secrets.APP_DOMAIN }}
+      APP_DOMAIN_CERTIFICATE: ${{ secrets.APP_DOMAIN_CERTIFICATE }}
+      APP_STAGE: ${{ secrets.APP_STAGE }}
+      DATABASE_URL: null
+    runs-on: Ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - name: Validation of Composer configuration
+      run: composer validate
+    - name: Installing Composer production dependencies
+      run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress --no-suggest --no-interaction --no-scripts
+    - name: Warming up Symfony cache
+      run: php bin/console cache:clear --no-debug --no-warmup --env=${APP_ENV} && php bin/console cache:warmup --env=${APP_ENV}
+    - name: Configuring Serverless CLI
+      run: sudo npm install -g serverless && serverless config credentials --provider aws --key ${AWS_KEY} --secret ${AWS_SECRET} --stage ${APP_STAGE}
+    - name: Deploying Web Lambda and CLI Lambda
+      run: serverless deploy --stage ${APP_STAGE} --conceal
+    - name: Updating DynamoDB
+      run: AWS_DEFAULT_REGION=${AWS_DEPLOYMENT_REGION} AWS_ACCESS_KEY_ID=${AWS_KEY} AWS_SECRET_ACCESS_KEY=${AWS_SECRET} vendor/bin/bref cli sushi-doctor-${APP_STAGE}-console -- app:update-dynamo-db
+    - uses: jakejarvis/s3-sync-action@v0.5.1
+      with:
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: sushi-doctor-asset-${APP_STAGE}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET }}
+        AWS_REGION: ${{ secrets.AWS_DEPLOYMENT_REGION }}
+        SOURCE_DIR: 'app/public/assets' # the default workdir is overridden, we need to manually add app/
+        DEST_DIR: 'assets'
+#    - name: Configure AWS Credentials
+#      uses: clowdhaus/aws-github-actions/iam_access_credentials@master
+#      with:
+#        aws-access-key-id: ${{ secrets.AWS_KEY }}
+#        aws-secret-access-key: ${{ secrets.AWS_SECRET }}
+#        aws-region: ${{ secrets.AWS_DEPLOYMENT_REGION }}
+#    - uses: clowdhaus/aws-github-actions/awscli@master
+#      with:
+#        cli-command: s3 sync public/assets s3://sushi-doctor-asset-${APP_STAGE}/assets --delete
+#        cli-subcommand:
+#        aws-region: us-east-1

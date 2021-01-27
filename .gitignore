@@ -1,0 +1,36 @@
+###> symfony/framework-bundle ###
+/app/.env.local
+/app/.env.local.php
+/app/.env.*.local
+/app/config/secrets/prod/prod.decrypt.private.php
+/app/public/bundles/
+/app/var/
+/app/composer.phar
+/app/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/app/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> empty folders ###
+/volumes/dynamodb_data/*
+!/volumes/dynamodb_data/.gitkeep
+###< empty folders ###
+
+###> IDE ###
+.idea/
+.vscode/
+/nbproject/
+###< IDE ###
+
+###> SASS ###
+.sass-cache
+###< SASS ###
+
+###> Serverless ###
+/app/.serverless
+###< Serverless ###
+

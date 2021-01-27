@@ -1,0 +1,49 @@
+version: "3.5"
+services:
+  web:
+    image: bref/fpm-dev-gateway
+    ports:
+      - '3000:80'
+    volumes:
+      - ./app:/var/task:ro
+    links:
+      - php
+    environment:
+      HANDLER: public/index.php
+      DOCUMENT_ROOT: public
+  php:
+    image: bref/php-74-fpm-dev
+    volumes:
+      - ./app:/var/task:ro
+    depends_on:
+      - dynamodb-local
+  composer:
+    image: composer/composer:2
+    command: install
+    volumes:
+      - ./app:/app
+  dynamodb-local:
+    image: amazon/dynamodb-local:latest
+    ports:
+      - 8000:8000
+    command:
+      - -Djava.library.path=./DynamoDBLocal_lib
+      - -jar
+      - DynamoDBLocal.jar
+      - -dbPath
+      - /dynamodb_local_db
+      - -cors
+      - '*'
+      - -sharedDb
+    volumes:
+      - ./volumes/dynamodb_data:/dynamodb_local_db
+  dynamodb-admin:
+    build:
+      context: .
+      dockerfile: DynamoDbAdmin
+    depends_on:
+      - dynamodb-local
+    ports:
+      - "8001:8001"
+    environment:
+      - DYNAMO_ENDPOINT=http://dynamodb-local:8000

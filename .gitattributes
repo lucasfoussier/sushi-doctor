@@ -1,0 +1,6 @@
+/docker/nginx/* binary
+/app/public/fonts/* linguist-vendored
+/app/public/vendor/* linguist-vendored
+/app/public/css/back/volt/* linguist-vendored
+/app/public/css/back/volt.css linguist-vendored
+/app/public/js/back/volt.js linguist-vendored
