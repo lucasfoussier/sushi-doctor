@@ -12,7 +12,7 @@ services:
       HANDLER: public/index.php
       DOCUMENT_ROOT: public
   php:
-    image: bref/php-74-fpm-dev
+    image: bref/php-80-fpm-dev
     volumes:
       - ./app:/var/task:ro
     depends_on:

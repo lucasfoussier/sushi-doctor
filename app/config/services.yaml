@@ -4,8 +4,8 @@ parameters:
     app.name: "sushi-doctor" # Never change
 services:
     _defaults:
-        autowire: true
-        autoconfigure: true
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $appStage: '%app.stage%'
             $appName: '%app.name%'

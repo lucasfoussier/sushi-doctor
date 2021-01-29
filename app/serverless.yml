@@ -12,7 +12,7 @@ provider:
     AWS_SECRET: ${env:AWS_SECRET}
     AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
     APP_SECRET: ${env:APP_SECRET}
-    DATABASE_URL: ""
+#    DATABASE_URL: ""
 plugins:
   - ./vendor/bref/bref
 package:
@@ -26,14 +26,14 @@ functions:
     handler: public/index.php
     timeout: 28
     layers:
-      - ${bref:layer.php-74-fpm}
+      - ${bref:layer.php-80-fpm}
     events:
       - httpApi: '*'
   console:
     handler: bin/console
     timeout: 120
     layers:
-      - ${bref:layer.php-74} # PHP Web
+      - ${bref:layer.php-80} # PHP Web
       - ${bref:layer.console} # PHP Console
 resources:
   Resources:
