@@ -16,6 +16,8 @@ use DateTime;
 
 #[
     TableName(DYNAMODB_TABLE_PREFIX.'articles'),
+    WriteCapacityUnits(5),
+    ReadCapacityUnits(5)
 ]
 class Article extends Item
 {
