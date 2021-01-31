@@ -1,14 +1,15 @@
 parameters:
     app.stage: "%env(resolve:APP_STAGE)%"
+    aws.key: "%env(resolve:AWS_KEY)%"
+    aws.secret: "%env(resolve:AWS_SECRET)%"
     aws.deployment.region: "%env(resolve:AWS_DEPLOYMENT_REGION)%"
-    app.name: "sushi-doctor" # Never change
+    aws.dynamodb.endpoint: "%env(resolve:AWS_DYNAMO_DB_ENDPOINT)%"
 services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $appStage: '%app.stage%'
-            $appName: '%app.name%'
     App\:
         resource: '../src/'
         exclude:
@@ -19,3 +20,13 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
+
+#    AppNameGetter:
+#        class: App\DynamoDb\AppNameGetter
+
+    JLucki\ODM\Spark\Spark:
+        $version: 'latest'
+        $region: '%aws.deployment.region%'
+        $endpoint: '%aws.dynamodb.endpoint%'
+        $key: '%aws.key%'
+        $secret: '%aws.secret%'

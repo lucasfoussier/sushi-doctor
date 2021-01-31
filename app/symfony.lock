@@ -123,6 +123,9 @@
     "hollodotme/fast-cgi-client": {
         "version": "v3.1.5"
     },
+    "jlucki/spark": {
+        "version": "v0.1"
+    },
     "laminas/laminas-code": {
         "version": "4.0.0"
     },

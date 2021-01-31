@@ -1,47 +1,41 @@
 <?php
 namespace App\Controller;
 
-use Aws\DynamoDb\DynamoDbClient;
+use DateTime;
+use JLucki\ODM\Spark\Spark;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\DynamoDb\Model;
-use App\DynamoDb\User;
+use App\DynamoDb\Article;
 
 class DefaultController extends AbstractController
 {
 
-    /**
-     * @var Model
-     */
-    private $dynamoDbModel;
+    public function __construct(
+        private Spark $spark,
+    ){}
 
-    /**
-     * @var DynamoDbClient
-     */
-    private $dynamoDbClient;
-
-    public function __construct(Model $model, DynamoDbClient $dynamoDbClient)
-    {
-        $this->dynamoDbModel = $model;
-        $this->dynamoDbClient = $dynamoDbClient;
-    }
-
-    /**
-     * @Route("/", name="home")
-     */
+    #[
+        Route("/", name:"home")
+    ]
     public function index(): Response
     {
 
-        $user = new User();
-        $user->setFirstName("hello");
-        $user->setLastName("world");
-        $user->save();
-        $user->getId();
+        $date = new DateTime();
 
-        $user = User::getById($user->getId());
-        $user->setLastName("wood");
-        $user->save();
+        $blog = new Article();
+        $blog
+            ->setType('blog')
+            ->setDatetime($date)
+            ->setSlug('my-blog-post-' . $date->format('y-m-d-H-i-s'))
+            ->setTitle('My Blog Post ' . $date->format('Y-m-d H:i:s'))
+            ->setContent('Hello, this is the blog post content.')
+        ;
+        $this->spark->putItem($blog);
+
+
+
+
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',

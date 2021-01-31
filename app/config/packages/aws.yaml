@@ -2,10 +2,8 @@ aws:
     version: latest
     region: '%aws.deployment.region%'
     credentials:
-        key: "%env(AWS_KEY)%"
-        secret: "%env(AWS_SECRET)%"
-    DynamoDb:
-        region: '%aws.deployment.region%'
+        key: '%aws.key%'
+        secret: '%aws.secret%'
     S3:
         version: '2006-03-01'
 #    Sqs:

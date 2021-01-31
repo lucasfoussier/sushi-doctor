@@ -38,12 +38,7 @@ class Kernel extends BaseKernel
 
     public function getLogDir()
     {
-        // When on the lambda only /tmp is writeable
-//        if (isset($_SERVER['LAMBDA_TASK_ROOT'])) {
         return '/tmp/log/';
-//        }
-
-//        return parent::getLogDir();
     }
 
     public function getCacheDir()

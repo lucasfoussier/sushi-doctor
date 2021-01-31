@@ -1,10 +1,11 @@
 <?php
 namespace App\Command;
 
-use App\DynamoDb\Model;
-use App\DynamoDb\User;
-use Aws\DynamoDb\DynamoDbClient;
+use App\DynamoDb\Article;
 use Aws\DynamoDb\Exception\DynamoDbException;
+use JLucki\ODM\Spark\Exception\TableAlreadyExistsException;
+use JLucki\ODM\Spark\Exception\TableDoesNotExistException;
+use JLucki\ODM\Spark\Spark;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -12,26 +13,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateDynamoDb extends Command
 {
-    /**
-     * @var string
-     */
-    private $appStage;
 
-    /**
-     * @var Model
-     */
-    private $dynamoDbModel;
-
-    /**
-     * @var DynamoDbClient
-     */
-    private $dynamoDbClient;
-
-    public function __construct(string $appStage, Model $model, DynamoDbClient $dynamoDbClient)
-    {
-        $this->appStage = $appStage;
-        $this->dynamoDbModel = $model;
-        $this->dynamoDbClient = $dynamoDbClient;
+    public function __construct(
+        private string $appStage,
+        private Spark $spark,
+    ) {
         parent::__construct('app:update-dynamo-db');
     }
 
@@ -56,7 +42,7 @@ class UpdateDynamoDb extends Command
             $deleteMode = $input->getOption('delete');
         }
         $schemas = [
-            User::schema(),
+            Article::class,
         ];
         if(true === $deleteMode){
             $output->writeln('Resetting database!');
@@ -68,22 +54,22 @@ class UpdateDynamoDb extends Command
         if (true === $deleteMode) {
             foreach ($schemas as $schema) {
                 try {
-                    Model::$client->deleteTable([
-                        "TableName" => $schema['TableName']
-                    ]);
+                    $this->spark->getTable($schema);
+                    $this->spark->deleteTable($schema);
                     $deletedTableCount++;
-                } catch (DynamoDbException $e) {
+                    $this->spark->createTable($schema);
+                } catch (TableDoesNotExistException $e) {
+                    $this->spark->createTable($schema);
                     $createdTableCount++;
                 }
-                Model::$client->createTable($schema);
             }
             $output->writeln($deletedTableCount.' table(s) reinitialized');
         } else {
             foreach ($schemas as $schema) {
                 try {
-                    Model::$client->createTable($schema);
+                    $this->spark->createTable($schema);
                     $createdTableCount++;
-                } catch (DynamoDbException $e) {}
+                } catch (TableAlreadyExistsException $e) {}
             }
         }
         $output->writeln($createdTableCount.' table(s) created');

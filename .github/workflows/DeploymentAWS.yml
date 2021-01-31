@@ -13,6 +13,7 @@ jobs:
       name: production
       url: https://sushi-doctor.com
     env:
+      APP_NAME: 'sushi-doctor'
       AWS_KEY: ${{ secrets.AWS_KEY }}
       AWS_SECRET: ${{ secrets.AWS_SECRET }}
       AWS_DEPLOYMENT_REGION: ${{ secrets.AWS_DEPLOYMENT_REGION }}
@@ -21,7 +22,6 @@ jobs:
       APP_DOMAIN: ${{ secrets.APP_DOMAIN }}
       APP_DOMAIN_CERTIFICATE: ${{ secrets.APP_DOMAIN_CERTIFICATE }}
       APP_STAGE: ${{ secrets.APP_STAGE }}
-#      DATABASE_URL: null
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4

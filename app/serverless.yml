@@ -12,7 +12,8 @@ provider:
     AWS_SECRET: ${env:AWS_SECRET}
     AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
     APP_SECRET: ${env:APP_SECRET}
-#    DATABASE_URL: ""
+    AWS_DYNAMO_DB_ENDPOINT: 'regional'
+    APP_NAME: 'sushi-doctor'
 plugins:
   - ./vendor/bref/bref
 package:

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7a62b484e4bea5481830c19bcd85609",
+    "content-hash": "664d86eee1bd43df4ff016fa890860a6",
     "packages": [
         {
             "name": "async-aws/core",
@@ -132,16 +132,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.172.3",
+            "version": "3.172.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "14fd73f12fc70d5f48e034f5dfc33136136adb61"
+                "reference": "506e60798bb7d13bdafadce9727ab9cc9ac987b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/14fd73f12fc70d5f48e034f5dfc33136136adb61",
-                "reference": "14fd73f12fc70d5f48e034f5dfc33136136adb61",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/506e60798bb7d13bdafadce9727ab9cc9ac987b0",
+                "reference": "506e60798bb7d13bdafadce9727ab9cc9ac987b0",
                 "shasum": ""
             },
             "require": {
@@ -216,9 +216,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.172.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.172.4"
             },
-            "time": "2021-01-28T19:14:55+00:00"
+            "time": "2021-01-29T19:17:51+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -2253,6 +2253,68 @@
                 "source": "https://github.com/hollodotme/fast-cgi-client/tree/v3.1.5"
             },
             "time": "2020-12-10T10:15:06+00:00"
+        },
+        {
+            "name": "jlucki/spark",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jlucki/spark.git",
+                "reference": "ccf8d0bce5d97afc889e03d63e698622c8341eb1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jlucki/spark/zipball/ccf8d0bce5d97afc889e03d63e698622c8341eb1",
+                "reference": "ccf8d0bce5d97afc889e03d63e698622c8341eb1",
+                "shasum": ""
+            },
+            "require": {
+                "aws/aws-sdk-php": "^3.166",
+                "php": ">=8.0",
+                "symfony/http-foundation": "^5.2"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.32",
+                "phpunit/phpunit": "^8.2",
+                "vimeo/psalm": "^4.2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JLucki\\ODM\\Spark\\": "src/Spark"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Lucki",
+                    "email": "jan@lucki.dev",
+                    "homepage": "https://www.lucki.dev",
+                    "role": "Lead Project Developer"
+                }
+            ],
+            "description": "Spark is an Object Document Mapper (ODM) for use with Amazon DynamoDB.",
+            "homepage": "https://www.lucki.dev",
+            "keywords": [
+                "aws",
+                "data",
+                "database",
+                "dynamodb",
+                "mapper",
+                "mapping",
+                "nosql",
+                "object",
+                "odm",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/jlucki/spark/issues",
+                "source": "https://github.com/jlucki/spark/tree/v0.1"
+            },
+            "time": "2021-01-04T19:28:55+00:00"
         },
         {
             "name": "laminas/laminas-code",
@@ -9564,7 +9626,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2.5",
+        "php": ">=8.0",
         "ext-ctype": "*",
         "ext-iconv": "*"
     },

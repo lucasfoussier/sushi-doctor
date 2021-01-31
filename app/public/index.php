@@ -6,9 +6,30 @@ use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/vendor/autoload.php';
-if($_SERVER['APP_ENV'] !== 'prod') {
+
+if(!isset($_SERVER['APP_ENV'])){
     (new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
+} else {
+    if($_SERVER['APP_ENV'] !== 'prod') {
+        (new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
+    }
 }
+
+if(isset($_SERVER['APP_STAGE'])){
+    define('APP_STAGE', $_SERVER['APP_STAGE']);
+} else {
+    throw new \Exception('APP_STAGE undefined');
+}
+
+if(isset($_SERVER['APP_NAME'])){
+    define('APP_NAME', $_SERVER['APP_NAME']);
+} else {
+    throw new \Exception('APP_NAME undefined');
+}
+
+define('DYNAMODB_TABLE_PREFIX', APP_NAME.'.'.APP_STAGE.'.');
+
+
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
     Debug::enable();
