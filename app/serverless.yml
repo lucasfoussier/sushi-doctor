@@ -11,7 +11,6 @@ provider:
     AWS_KEY: ${env:AWS_KEY}
     AWS_SECRET: ${env:AWS_SECRET}
     AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
-    AWS_WARMUP_RATE: ${env:AWS_WARMUP_RATE}
     APP_SECRET: ${env:APP_SECRET}
     AWS_DYNAMO_DB_ENDPOINT: 'regional'
     APP_NAME: 'sushi-doctor'
