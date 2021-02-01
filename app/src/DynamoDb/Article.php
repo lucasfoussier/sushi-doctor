@@ -11,6 +11,8 @@ use JLucki\ODM\Spark\Attribute\KeyType;
 use JLucki\ODM\Spark\Attribute\OpenAttribute;
 use JLucki\ODM\Spark\Attribute\ProjectionType;
 use JLucki\ODM\Spark\Attribute\TableName;
+use JLucki\ODM\Spark\Attribute\WriteCapacityUnits;
+use JLucki\ODM\Spark\Attribute\ReadCapacityUnits;
 use JLucki\ODM\Spark\Model\Base\Item;
 use DateTime;
 
