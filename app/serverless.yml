@@ -30,6 +30,10 @@ functions:
       - ${bref:layer.php-80-fpm}
     events:
       - httpApi: '*'
+      - schedule:
+          rate: rate(${env:AWS_WARMUP_RATE})
+          input:
+            warmer: true
   console:
     handler: bin/console
     timeout: 120
