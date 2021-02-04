@@ -8,12 +8,12 @@ provider:
   environment:
     APP_NAME: 'sushi-doctor'
     APP_ENV: ${env:APP_ENV}
-    APP_DEBUG: ${env:APP_DEBUG}'
+    APP_DEBUG: ${env:APP_DEBUG}
     APP_STAGE: ${env:APP_STAGE}
     AWS_KEY: ${env:AWS_KEY}
     AWS_SECRET: ${env:AWS_SECRET}
     AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
-    AWS_DYNAMO_DB_ENDPOINT: ${env:AWS_DYNAMO_DB_ENDPOINT}'
+    AWS_DYNAMO_DB_ENDPOINT: ${env:AWS_DYNAMO_DB_ENDPOINT}
     APP_SECRET: ${env:APP_SECRET}
 plugins:
   - ./vendor/bref/bref
