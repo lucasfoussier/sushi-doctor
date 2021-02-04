@@ -23,7 +23,6 @@ package:
     - tests/**
     - var/log/**
     - public/assets/**
-    - public/build/**
     - node_modules/**
 functions:
   website:
