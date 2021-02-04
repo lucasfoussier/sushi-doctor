@@ -6,14 +6,15 @@ provider:
   lambdaHashingVersion: 20201221
   runtime: provided.al2
   environment:
+    APP_NAME: 'sushi-doctor'
     APP_ENV: ${env:APP_ENV}
+    APP_DEBUG: ${env:APP_DEBUG}'
     APP_STAGE: ${env:APP_STAGE}
     AWS_KEY: ${env:AWS_KEY}
     AWS_SECRET: ${env:AWS_SECRET}
     AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
+    AWS_DYNAMO_DB_ENDPOINT: ${env:AWS_DYNAMO_DB_ENDPOINT}'
     APP_SECRET: ${env:APP_SECRET}
-    AWS_DYNAMO_DB_ENDPOINT: 'regional'
-    APP_NAME: 'sushi-doctor'
 plugins:
   - ./vendor/bref/bref
 package:

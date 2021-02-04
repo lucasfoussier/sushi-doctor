@@ -14,9 +14,11 @@ jobs:
       url: https://sushi-doctor.com
     env:
       APP_NAME: 'sushi-doctor'
+      APP_DEBUG: ${{ secrets.APP_DEBUG }}
       AWS_KEY: ${{ secrets.AWS_KEY }}
       AWS_SECRET: ${{ secrets.AWS_SECRET }}
       AWS_DEPLOYMENT_REGION: ${{ secrets.AWS_DEPLOYMENT_REGION }}
+      AWS_DYNAMO_DB_ENDPOINT: ${{ secrets.AWS_DYNAMO_DB_ENDPOINT }}
       AWS_WARMUP_RATE: ${{ secrets.AWS_WARMUP_RATE }}
       APP_SECRET: ${{ secrets.APP_SECRET }}
       APP_ENV: ${{ secrets.APP_ENV }}
