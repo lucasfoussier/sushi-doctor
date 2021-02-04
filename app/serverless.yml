@@ -24,6 +24,7 @@ package:
     - var/log/**
     - public/assets/**
     - public/build/**
+    - node_modules/**
 functions:
   website:
     handler: public/index.php
