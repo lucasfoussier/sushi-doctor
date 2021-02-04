@@ -16,13 +16,11 @@ class DefaultController extends AbstractController
     ){}
 
     #[
-        Route("/", name:"home")
+        Route("/api", name:"home")
     ]
     public function index(): Response
     {
-
         $date = new DateTime();
-
         $blog = new Article();
         $blog
             ->setType('blog')
@@ -33,13 +31,17 @@ class DefaultController extends AbstractController
         ;
         $this->spark->putItem($blog);
 
+        die('fdsq');
+
+    }
 
 
-
-
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
+    /**
+     * @Route("/{req}", name="webpack", requirements={"req"="^((?!api).)*$"})
+     */
+    public function test(): Response
+    {
+        return $this->render('default/index.html.twig', []);
     }
 
 

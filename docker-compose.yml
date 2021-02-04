@@ -23,27 +23,14 @@ services:
     volumes:
       - ./app:/app
   dynamodb-local:
-    image: amazon/dynamodb-local:latest
-    ports:
-      - 8000:8000
-    command:
-      - -Djava.library.path=./DynamoDBLocal_lib
-      - -jar
-      - DynamoDBLocal.jar
-      - -dbPath
-      - /dynamodb_local_db
-      - -cors
-      - '*'
-      - -sharedDb
-    volumes:
-      - ./volumes/dynamodb_data:/dynamodb_local_db
+    build:
+      context: .
+      dockerfile: DockerfileDynamoDbLocal
   dynamodb-admin:
     build:
       context: .
-      dockerfile: DynamoDbAdmin
+      dockerfile: DockerfileDynamoDbAdmin
     depends_on:
       - dynamodb-local
     ports:
-      - "8001:8001"
-    environment:
-      - DYNAMO_ENDPOINT=http://dynamodb-local:8000
+      - "8000:8001"

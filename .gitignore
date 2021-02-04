@@ -34,3 +34,10 @@
 /app/.serverless
 ###< Serverless ###
 
+###> symfony/webpack-encore-bundle ###
+app/node_modules/
+app/public/build/
+app/npm-debug.log
+app/yarn-error.log
+###< symfony/webpack-encore-bundle ###
+

@@ -1,0 +1,5 @@
+FROM amazon/dynamodb-local:latest
+USER root
+RUN mkdir /dynamodb_local_db && chmod -R 777 /dynamodb_local_db
+VOLUME /dynamodb_local_db
+CMD ["-Djava.library.path=./DynamoDBLocal_lib", "-jar", "DynamoDBLocal.jar", "-dbPath", "/dynamodb_local_db", "-cors", "'*'", "-sharedDb"]
