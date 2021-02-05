@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch,Redirect, Link, withRouter} from 'react-router-dom';
+import logoPng from '../assets/img/php.png';
 
 class Test extends Component {
 
@@ -7,7 +8,7 @@ class Test extends Component {
         return (
             <div>
                 {'test'}
-                <img src="assets/img/php.png" alt="Logo" />;
+                <img src={logoPng} alt="Logo" />;
             </div>
         )
     }

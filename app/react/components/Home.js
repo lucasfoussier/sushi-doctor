@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 import {Route, Switch,Redirect, Link, withRouter} from 'react-router-dom';
 import Test from "./Test";
+
+import logoPng from '../assets/img/php.png';
+
+
 class Home extends Component {
 
     render() {
         return (
             <div>
-                {'fdsqfd'}
-                <img src="assets/img/php.png" alt="Logo" />;
+                {'dfsdfqdddss'}
+                <img src={logoPng} alt="Logo" />;
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <Link className={"navbar-brand"} to={"/"}> Symfony React Project </Link>
                     <div className="collapse navbar-collapse" id="navbarText">
