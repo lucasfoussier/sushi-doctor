@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Switch,Redirect, Link, withRouter} from 'react-router-dom';
-import logoPng from '../assets/img/php.png';
+import logoPng from '../../img/php.png';
 
 class Test extends Component {
 
