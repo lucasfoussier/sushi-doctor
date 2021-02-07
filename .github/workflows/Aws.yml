@@ -6,24 +6,10 @@ defaults:
   run:
     working-directory: ./app
 jobs:
-  lint-front:
-    name: 'React Eslint'
-    runs-on: Ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2.3.4
-    - name: Eslint
-      run: yarn install && yarn lint
-  lint-back:
-    name: 'PHP Tests'
-    runs-on: Ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2.3.4
-    - name: Eslint
-      run: yarn install && yarn lint
 
   deploy-production:
     needs: [lint-front, lint-back]
-    name: 'Production Deployment to AWS'
+    name: 'Production Deployment'
     if: github.ref == 'refs/heads/main'
     environment: production
     env:
