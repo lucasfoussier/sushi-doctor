@@ -11,4 +11,3 @@ RUN apt-get -y update && \
   rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 EXPOSE 8080
-CMD ["yarn", "dev"]

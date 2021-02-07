@@ -20,5 +20,21 @@ Encore
         useBuiltIns: 'usage',
         corejs: 3
     })
+    .addAliases({
+        '@components': `${__dirname}/react/src/components`,
+        '@img': `${__dirname}/react/img`,
+    })
+    // .enableEslintLoader()
+    // .enableSassLoader()
+    .addLoader({
+        test: /\.(js|tsx)$/,
+        loader: 'eslint-loader',
+        exclude: [/node_modules/],
+        enforce: "pre",
+        options: {
+            configFile: './.eslintrc',
+            emitWarning: true
+        }
+    })
 ;
 module.exports = Encore.getWebpackConfig();

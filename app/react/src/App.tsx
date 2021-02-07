@@ -1,22 +1,24 @@
 import React from 'react';
 import './App.css';
-import { Link, Redirect, Route, Switch } from "react-router-dom";
-import Test from "./components/Test";
-import Home from "./components/Home";
+import {
+  Link, Redirect, Route, Switch,
+} from 'react-router-dom';
+import Test from '@components/Test';
+import Home from '@components/Home';
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div>
+    <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link className={"navbar-brand"} to={"/"}> Symfony React Project </Link>
+        <Link className="navbar-brand" to="/"> Symfony React Project </Link>
         <div className="collapse navbar-collapse" id="navbarText">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link className={"nav-link"} to={"/test"}> Test </Link>
+              <Link className="nav-link" to="/test"> Test </Link>
             </li>
 
             <li className="nav-item">
-              <Link className={"nav-link"} to={"/"}> home </Link>
+              <Link className="nav-link" to="/"> home </Link>
             </li>
           </ul>
         </div>
@@ -26,7 +28,7 @@ function App() {
         <Route path="/home" component={Home} />
         <Route path="/test" component={Test} />
       </Switch>
-    </div>
+    </>
 
   );
 }
