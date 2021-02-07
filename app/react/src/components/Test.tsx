@@ -1,7 +1,7 @@
 import React from 'react';
 import logoPng from '@img/php.png';
 
-function Test(): JSX.Element {
+function Test() {
   return (
     <div>
       test
