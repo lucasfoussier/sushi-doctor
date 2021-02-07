@@ -1,4 +1,4 @@
-name: Deployment to AWS
+name: Push
 on:
   push:
     branches: [main, preprod, dev]
