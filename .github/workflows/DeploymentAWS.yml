@@ -1,4 +1,4 @@
-name: Push
+name: Jobs
 on:
   push:
     branches: [main, preprod, dev]
@@ -7,14 +7,14 @@ defaults:
     working-directory: ./app
 jobs:
   lint-front:
-    name: 'Checking React code quality'
+    name: 'React Eslint'
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4
     - name: Eslint
       run: yarn install && yarn lint
   lint-back:
-    name: 'Checking React code quality'
+    name: 'PHP Tests'
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4
