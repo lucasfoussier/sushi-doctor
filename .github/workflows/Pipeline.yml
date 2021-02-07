@@ -47,7 +47,7 @@ jobs:
     - name: Building Front with Webpack Encore
       run: yarn install && yarn build
     - name: Installing Composer production dependencies
-      run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress --no-suggest --no-interaction --no-scripts
+      run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress --no-interaction --no-scripts
     - name: Warming up Symfony cache
       run: php bin/console cache:clear --no-debug --no-warmup --env=${APP_ENV} && php bin/console cache:warmup --env=${APP_ENV}
     - name: Configuring Serverless CLI
