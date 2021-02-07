@@ -11,8 +11,8 @@ jobs:
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4
-    - name: Building Front with Webpack Encore
-      run: yarn lint
+    - name: Eslint
+      run: yarn install && yarn lint
 
   deploy-production:
     name: 'Production Deployment to AWS'
