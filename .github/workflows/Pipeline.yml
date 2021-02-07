@@ -56,7 +56,8 @@ jobs:
       run: serverless deploy --stage ${APP_STAGE} --conceal
     - name: Updating DynamoDB
       run: AWS_DEFAULT_REGION=${AWS_DEPLOYMENT_REGION} AWS_ACCESS_KEY_ID=${AWS_KEY} AWS_SECRET_ACCESS_KEY=${AWS_SECRET} vendor/bin/bref cli sushi-doctor-${APP_STAGE}-console -- app:update-dynamo-db
-    - uses: jakejarvis/s3-sync-action@v0.5.1
+    - name: Uploading Assets
+      uses: jakejarvis/s3-sync-action@v0.5.1
       with:
         args: --acl public-read --follow-symlinks --delete
       env:
@@ -66,7 +67,8 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_DEPLOYMENT_REGION }}
         SOURCE_DIR: 'app/public/assets' # the default workdir is overridden, we need to manually add app/
         DEST_DIR: 'assets'
-    - uses: jakejarvis/s3-sync-action@v0.5.1
+    - name: Uploading React Build
+      uses: jakejarvis/s3-sync-action@v0.5.1
       with:
         args: --acl public-read --follow-symlinks --delete
       env:
@@ -76,7 +78,8 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_DEPLOYMENT_REGION }}
         SOURCE_DIR: 'app/public/build' # the default workdir is overridden, we need to manually add app/
         DEST_DIR: 'build'
-    - uses: jakejarvis/s3-sync-action@v0.5.1
+    - name: Updating robots.txt, favicon.ico
+      uses: jakejarvis/s3-sync-action@v0.5.1
       with:
         args: --acl public-read --follow-symlinks
       env:
