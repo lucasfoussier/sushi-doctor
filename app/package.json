@@ -44,7 +44,7 @@
         "webpack-notifier": "^1.6.0"
     },
     "scripts": {
-        "dev": "encore dev-server",
+        "dev": "yarn install && encore dev-server",
         "dev-server": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress",

@@ -6,12 +6,18 @@ defaults:
   run:
     working-directory: ./app
 jobs:
+  lint-front:
+    name: 'Checking React code quality'
+    runs-on: Ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - name: Building Front with Webpack Encore
+      run: yarn lint
+
   deploy-production:
     name: 'Production Deployment to AWS'
     if: github.ref == 'refs/heads/main'
-    environment:
-      name: production
-      url: https://sushi-doctor.com
+    environment: production
     env:
       APP_NAME: 'sushi-doctor'
       APP_DEBUG: ${{ secrets.APP_DEBUG }}
@@ -62,14 +68,3 @@ jobs:
         AWS_REGION: ${{ secrets.AWS_DEPLOYMENT_REGION }}
         SOURCE_DIR: 'app/public/build' # the default workdir is overridden, we need to manually add app/
         DEST_DIR: 'build'
-#    - name: Configure AWS Credentials
-#      uses: clowdhaus/aws-github-actions/iam_access_credentials@master
-#      with:
-#        aws-access-key-id: ${{ secrets.AWS_KEY }}
-#        aws-secret-access-key: ${{ secrets.AWS_SECRET }}
-#        aws-region: ${{ secrets.AWS_DEPLOYMENT_REGION }}
-#    - uses: clowdhaus/aws-github-actions/awscli@master
-#      with:
-#        cli-command: s3 sync public/assets s3://sushi-doctor-asset-${APP_STAGE}/assets --delete
-#        cli-subcommand:
-#        aws-region: us-east-1
