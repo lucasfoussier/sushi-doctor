@@ -129,6 +129,15 @@ resources:
                 - 'Referer'
             ViewerProtocolPolicy: redirect-to-https # Force https
           CacheBehaviors:
+            -   PathPattern: 'robots.txt'
+                TargetOriginId: Assets
+                AllowedMethods: [GET, HEAD]
+                ForwardedValues:
+                  QueryString: 'false'
+                  Cookies:
+                    Forward: none
+                ViewerProtocolPolicy: redirect-to-https
+                Compress: true
             -   PathPattern: 'assets/*' # Assets will be served under the `/assets/` prefix
                 TargetOriginId: Assets # the static files on S3
                 AllowedMethods: [GET, HEAD]
