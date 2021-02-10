@@ -44,3 +44,6 @@ app/yarn-error.log
 ###> lexik/jwt-authentication-bundle ###
 app/config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
+###> lexik/jwt-authentication-bundle ###
+app/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
