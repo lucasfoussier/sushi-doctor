@@ -1,7 +1,9 @@
 <?php
 namespace App\Command;
 
-use App\DynamoDb\Article;
+use App\Entity\Article;
+use App\Entity\Rikudou;
+use App\Entity\User;
 use Aws\DynamoDb\Exception\DynamoDbException;
 use JLucki\ODM\Spark\Exception\TableAlreadyExistsException;
 use JLucki\ODM\Spark\Exception\TableDoesNotExistException;
@@ -43,6 +45,8 @@ class UpdateDynamoDb extends Command
         }
         $schemas = [
             Article::class,
+            Rikudou::class,
+            User::class
         ];
         if(true === $deleteMode){
             $output->writeln('Resetting database!');

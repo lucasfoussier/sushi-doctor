@@ -1,12 +1,17 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
 use DateTime;
 use JLucki\ODM\Spark\Spark;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use App\DynamoDb\Article;
+use App\Entity\Article;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DefaultController extends AbstractController
 {
@@ -18,20 +23,50 @@ class DefaultController extends AbstractController
     #[
         Route("/api", name:"home")
     ]
-    public function index(): Response
+    public function index(
+        UserRepository $userRepository
+    ): Response
     {
-        $date = new DateTime();
-        $blog = new Article();
-        $blog
-            ->setType('blog')
-            ->setDatetime($date)
-            ->setSlug('my-blog-post-' . $date->format('y-m-d-H-i-s'))
-            ->setTitle('My Blog Post ' . $date->format('Y-m-d H:i:s'))
-            ->setContent('Hello, this is the blog post content.')
-        ;
-        $this->spark->putItem($blog);
+        $fetchedUser = $userRepository->findOneByEmail('lucasfoussier@gmail.com');
+        return new JsonResponse([
+            'fetchedUser' => $fetchedUser->getId(),
+            'user' => $this->getUser()->getUsername()
+        ]);
+//        die('fdsq');
 
-        die('fdsq');
+    }
+
+
+    #[
+        Route("/test", name:"test")
+    ]
+    public function test(
+        UserRepository $userRepository,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response
+    {
+        $user = new User();
+
+
+        $user->setPassword(
+            $passwordEncoder->encodePassword(
+                $user,
+                'test'
+            )
+        );
+
+        $user->setEmail('lucasfoussier@gmail.com');
+        $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $userRepository->insertNewUser($user);
+
+
+
+
+
+
+
+        return new JsonResponse(['ok']);
+//        die('fdsq');
 
     }
 
@@ -39,7 +74,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/{req}", name="webpack", requirements={"req"="^((?!api).)*$"})
      */
-    public function test(): Response
+    public function webpack(): Response
     {
         return $this->render('default/index.html.twig', []);
     }

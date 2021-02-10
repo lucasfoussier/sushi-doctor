@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\DynamoDb;
+namespace App\Entity;
 
 use JLucki\ODM\Spark\Attribute\AttributeName;
 use JLucki\ODM\Spark\Attribute\AttributeType;

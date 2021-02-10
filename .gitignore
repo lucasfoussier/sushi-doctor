@@ -12,18 +12,18 @@
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
-/app/phpunit.xml
+app/phpunit.xml
 ###< symfony/phpunit-bridge ###
 
 ###> empty folders ###
-/volumes/dynamodb_data/*
-!/volumes/dynamodb_data/.gitkeep
+volumes/dynamodb_data/*
+!volumes/dynamodb_data/.gitkeep
 ###< empty folders ###
 
 ###> IDE ###
 .idea/
 .vscode/
-/nbproject/
+nbproject/
 ###< IDE ###
 
 ###> SASS ###
@@ -31,7 +31,7 @@
 ###< SASS ###
 
 ###> Serverless ###
-/app/.serverless
+app/.serverless
 ###< Serverless ###
 
 ###> symfony/webpack-encore-bundle ###
@@ -41,3 +41,6 @@ app/npm-debug.log
 app/yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
+###> lexik/jwt-authentication-bundle ###
+app/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###

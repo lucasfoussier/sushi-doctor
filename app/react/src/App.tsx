@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import Test from '@components/Test';
 import Home from '@components/Home';
+import NotFound from '@container/NotFound';
 
 function App(): JSX.Element {
   return (
@@ -27,6 +28,9 @@ function App(): JSX.Element {
         <Redirect exact from="/" to="/home" />
         <Route path="/home" component={Home} />
         <Route path="/test" component={Test} />
+        <Route>
+          <NotFound />
+        </Route>
       </Switch>
     </>
 

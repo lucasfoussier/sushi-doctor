@@ -22,6 +22,7 @@ Encore
     })
     .addAliases({
         '@components': `${__dirname}/react/src/components`,
+        '@container': `${__dirname}/react/src/container`,
         '@img': `${__dirname}/react/img`,
     })
     // .enableEslintLoader()

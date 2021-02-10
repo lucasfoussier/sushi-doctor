@@ -4,6 +4,7 @@ parameters:
     aws.secret: "%env(resolve:AWS_SECRET)%"
     aws.deployment.region: "%env(resolve:AWS_DEPLOYMENT_REGION)%"
     aws.dynamodb.endpoint: "%env(resolve:AWS_DYNAMO_DB_ENDPOINT)%"
+    table.prefix: !php/const DYNAMODB_TABLE_PREFIX
 services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
@@ -20,13 +21,12 @@ services:
     App\Controller\:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
-
-#    AppNameGetter:
-#        class: App\DynamoDb\AppNameGetter
-
     JLucki\ODM\Spark\Spark:
         $version: 'latest'
         $region: '%aws.deployment.region%'
         $endpoint: '%aws.dynamodb.endpoint%'
         $key: '%aws.key%'
         $secret: '%aws.secret%'
+    app.jwt_token_authenticator:
+        class: App\Security\Guard\JWTTokenAuthenticator
+        parent: lexik_jwt_authentication.security.guard.jwt_token_authenticator

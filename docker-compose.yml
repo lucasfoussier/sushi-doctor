@@ -24,8 +24,8 @@ services:
       - ./app:/app
   yarn-dev:
     build:
-      context: .
-      dockerfile: DockerfileYarn
+      context: ./Dockerfiles
+      dockerfile: Yarn
     ports:
       - 8080:8080
     volumes:
@@ -35,12 +35,12 @@ services:
       - dev
   dynamodb-local:
     build:
-      context: .
-      dockerfile: DockerfileDynamoDbLocal
+      context: ./Dockerfiles
+      dockerfile: DynamoDbLocal
   dynamodb-admin:
     build:
-      context: .
-      dockerfile: DockerfileDynamoDbAdmin
+      context: ./Dockerfiles
+      dockerfile: DynamoDbAdmin
     depends_on:
       - dynamodb-local
     ports:

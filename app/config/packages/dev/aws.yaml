@@ -1,0 +1,8 @@
+aws:
+    version: latest
+    region: '%aws.deployment.region%'
+    credentials:
+        key: '%aws.key%'
+        secret: '%aws.secret%'
+    DynamoDb:
+        endpoint: '%aws.dynamodb.endpoint%'
