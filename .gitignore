@@ -42,8 +42,6 @@ app/yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> lexik/jwt-authentication-bundle ###
-app/config/jwt/*.pem
-###< lexik/jwt-authentication-bundle ###
-###> lexik/jwt-authentication-bundle ###
-app/config/jwt/*.pem
+app/config/jwt/prod/*
+!app/config/jwt/prod/.gitkeep
 ###< lexik/jwt-authentication-bundle ###

@@ -7,6 +7,7 @@ provider:
   runtime: provided.al2
   environment:
     APP_NAME: 'sushi-doctor'
+    JWT_KEYS_DIRECTORY: ${env:JWT_KEYS_DIRECTORY}
     APP_ENV: ${env:APP_ENV}
     APP_DEBUG: ${env:APP_DEBUG}
     APP_STAGE: ${env:APP_STAGE}

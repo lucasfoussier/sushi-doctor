@@ -1,5 +1,8 @@
 parameters:
     app.stage: "%env(resolve:APP_STAGE)%"
+    app.secret: "%env(resolve:APP_SECRET)%"
+    jwt.keys.directory: "%env(resolve:JWT_KEYS_DIRECTORY)%"
+    jwt.public.key: "%env(resolve:JWT_PUBLIC_KEY)%"
     aws.key: "%env(resolve:AWS_KEY)%"
     aws.secret: "%env(resolve:AWS_SECRET)%"
     aws.deployment.region: "%env(resolve:AWS_DEPLOYMENT_REGION)%"
@@ -27,9 +30,3 @@ services:
         $endpoint: '%aws.dynamodb.endpoint%'
         $key: '%aws.key%'
         $secret: '%aws.secret%'
-    app.jwt_token_authenticator:
-        class: App\Security\Guard\JWTTokenAuthenticator
-        parent: lexik_jwt_authentication.security.guard.jwt_token_authenticator
-    app.jwt_token_authenticator:
-        class: App\Security\Guard\JWTTokenAuthenticator
-        parent: lexik_jwt_authentication.security.guard.jwt_token_authenticator

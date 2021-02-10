@@ -14,4 +14,8 @@ docker-compose exec php php bin/console app:update-dynamo-db
 > Drop and recreate schema
 docker-compose exec php php bin/console app:update-dynamo-db --delete
 ```
+```
+> Regenerate JWT certificates (dev)
+dev : docker-compose exec php php bin/console lexik:jwt:generate-keypair
+```
 

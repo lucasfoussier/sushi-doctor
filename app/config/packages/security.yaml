@@ -3,15 +3,15 @@ security:
         user_provider:
             id: App\Security\UserProvider
     encoders:
-        Symfony\Component\Security\Core\User\UserInterface: auto
+        Symfony\Component\Security\Core\User\UserInterface: bcrypt
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-#        main:
-#            anonymous: true
-#            lazy: true
-#            provider: users_in_memory
+        refresh:
+            pattern:  ^/api/token/refresh
+            stateless: true
+            anonymous: true
         login:
             pattern: ^/api/login
             stateless: true
@@ -25,8 +25,9 @@ security:
             stateless: true
             guard:
                 authenticators:
-                    - app.jwt_token_authenticator #Related to services.yaml
-#                    - lexik_jwt_authentication.jwt_token_authenticator
+                    - lexik_jwt_authentication.jwt_token_authenticator
     access_control:
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+

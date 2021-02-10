@@ -54,7 +54,7 @@ class User extends Item implements UserInterface
 
     public function __construct()
     {
-        $this->id = Uuid::uuid4();
+        $this->id = Uuid::uuid4()->toString();
         $this->setRoles(['ROLE_USER']);
         parent::__construct();
     }
