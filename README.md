@@ -1,6 +1,4 @@
 # Sushi-doctor #
-
- 
 ```
 > Start the linter
 docker-compose run yarn-dev yarn lint
@@ -16,6 +14,6 @@ docker-compose exec php php bin/console app:update-dynamo-db --delete
 ```
 ```
 > Regenerate JWT certificates (dev)
-dev : docker-compose exec php php bin/console lexik:jwt:generate-keypair  --overwrite
+docker-compose exec php php bin/console lexik:jwt:generate-keypair  --overwrite
 ```
 
