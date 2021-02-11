@@ -6,6 +6,7 @@ import {
 import Test from '@components/Test';
 import Home from '@components/Home';
 import NotFound from '@container/NotFound';
+import Login from '@container/Login';
 
 function App(): JSX.Element {
   return (
@@ -21,6 +22,9 @@ function App(): JSX.Element {
             <li className="nav-item">
               <Link className="nav-link" to="/"> home </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/login"> home </Link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -28,6 +32,7 @@ function App(): JSX.Element {
         <Redirect exact from="/" to="/home" />
         <Route path="/home" component={Home} />
         <Route path="/test" component={Test} />
+        <Route path="/login" component={Login} />
         <Route>
           <NotFound />
         </Route>

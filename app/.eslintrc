@@ -39,6 +39,7 @@
         "map": [
           ["@components", "./react/src/components"],
           ["@container", "./react/src/container"],
+          ["@services", "./react/src/services"],
           ["@img", "./react/img"]
         ],
         "extensions": [

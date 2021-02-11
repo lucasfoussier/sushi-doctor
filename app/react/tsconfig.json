@@ -26,6 +26,12 @@
       ],
       "@container/*": [
         "./src/container/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@img/*": [
+        "./img/*"
       ]
     }
   },
