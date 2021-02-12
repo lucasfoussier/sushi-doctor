@@ -2,7 +2,7 @@ parameters:
     app.stage: "%env(resolve:APP_STAGE)%"
     app.secret: "%env(resolve:APP_SECRET)%"
     jwt.keys.directory: "%env(resolve:JWT_KEYS_DIRECTORY)%"
-    jwt.public.key: "%env(resolve:JWT_PUBLIC_KEY)%"
+    jwt.cookie.secure: "%env(resolve:JWT_COOKIE_SECURE)%"
     aws.key: "%env(resolve:AWS_KEY)%"
     aws.secret: "%env(resolve:AWS_SECRET)%"
     aws.deployment.region: "%env(resolve:AWS_DEPLOYMENT_REGION)%"
@@ -10,8 +10,8 @@ parameters:
     table.prefix: !php/const DYNAMODB_TABLE_PREFIX
 services:
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
         bind:
             $appStage: '%app.stage%'
     App\:
@@ -30,3 +30,7 @@ services:
         $endpoint: '%aws.dynamodb.endpoint%'
         $key: '%aws.key%'
         $secret: '%aws.secret%'
+    app.refreshservice:
+        class: App\Service\RefreshService
+        public: true
+        arguments: [ "@gesdinet.jwtrefreshtoken" ]
