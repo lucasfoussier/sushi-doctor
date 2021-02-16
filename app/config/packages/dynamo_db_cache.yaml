@@ -1,5 +1,5 @@
 rikudou_dynamo_db_cache:
   table: '%table.prefix%service.rikudou'
   replace_default_adapter: true
-  client_service: aws.dynamodb # TODO : create a factory with spark # https://symfony.com/doc/current/service_container/factories.html
+  client_service: aws.dynamodb
 

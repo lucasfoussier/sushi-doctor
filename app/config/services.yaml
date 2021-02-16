@@ -1,19 +1,27 @@
 parameters:
-    app.stage: "%env(resolve:APP_STAGE)%"
-    app.secret: "%env(resolve:APP_SECRET)%"
-    jwt.keys.directory: "%env(resolve:JWT_KEYS_DIRECTORY)%"
-    jwt.cookie.secure: "%env(resolve:JWT_COOKIE_SECURE)%"
-    aws.key: "%env(resolve:AWS_KEY)%"
-    aws.secret: "%env(resolve:AWS_SECRET)%"
-    aws.deployment.region: "%env(resolve:AWS_DEPLOYMENT_REGION)%"
-    aws.dynamodb.endpoint: "%env(resolve:AWS_DYNAMO_DB_ENDPOINT)%"
+    app.stage: "%env(string:APP_STAGE)%"
+    app.secret: "%env(string:APP_SECRET)%"
+    app.env: "%env(string:APP_ENV)%"
+    jwt.keys.directory: "%kernel.project_dir%/%env(string:JWT_KEYS_DIRECTORY)%"
+    jwt.cookie.secure: "%env(bool:JWT_COOKIE_SECURE)%"
+    jwt.cookie.path: "/api"
+    jwt.cookie.bearer.ttl: 900
+    jwt.cookie.refresh.ttl: 3600
+    aws.key: "%env(string:AWS_KEY)%"
+    aws.secret: "%env(string:AWS_SECRET)%"
+    aws.deployment.region: "%env(string:AWS_DEPLOYMENT_REGION)%"
+    aws.dynamodb.endpoint: "%env(string:AWS_DYNAMO_DB_ENDPOINT)%"
     table.prefix: !php/const DYNAMODB_TABLE_PREFIX
 services:
     _defaults:
         autowire: true
         autoconfigure: true
         bind:
+            $appEnv: '%app.env%'
             $appStage: '%app.stage%'
+            $jwtCookieRefreshTtl: '%jwt.cookie.refresh.ttl%'
+            $jwtCookiePath: '%jwt.cookie.path%'
+            $jwtCookieSecure: '%jwt.cookie.secure%'
     App\:
         resource: '../src/'
         exclude:
@@ -31,6 +39,6 @@ services:
         $key: '%aws.key%'
         $secret: '%aws.secret%'
     app.refreshservice:
-        class: App\Service\RefreshService
+        class: App\Security\RefreshService
         public: true
         arguments: [ "@gesdinet.jwtrefreshtoken" ]

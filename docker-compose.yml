@@ -14,7 +14,7 @@ services:
   php:
     image: bref/php-80-fpm-dev
     volumes:
-      - ./app:/var/task:ro
+      - ./app:/var/task
     depends_on:
       - dynamodb-local
   composer:

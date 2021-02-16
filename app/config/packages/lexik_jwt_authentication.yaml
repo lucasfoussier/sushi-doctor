@@ -2,7 +2,7 @@ lexik_jwt_authentication:
     secret_key: '%jwt.keys.directory%/private.pem'
     public_key: '%jwt.keys.directory%/public.pem'
     pass_phrase: '%app.secret%'
-    token_ttl: 900 # TODO: import param
+    token_ttl: '%jwt.cookie.bearer.ttl%'
     token_extractors:
         cookie:
             enabled: true
@@ -10,7 +10,7 @@ lexik_jwt_authentication:
     set_cookies:
         BEARER:
             samesite: lax
-            path: /api # TODO : Import param
+            path: '%jwt.cookie.path%'
             secure: '%jwt.cookie.secure%'
             httpOnly: true
 

@@ -6,7 +6,6 @@ use JLucki\ODM\Spark\Attribute\AttributeName;
 use JLucki\ODM\Spark\Attribute\AttributeType;
 use JLucki\ODM\Spark\Attribute\GlobalSecondaryIndex;
 use JLucki\ODM\Spark\Attribute\KeyType;
-use JLucki\ODM\Spark\Attribute\OpenAttribute;
 use JLucki\ODM\Spark\Attribute\ProjectionType;
 use JLucki\ODM\Spark\Attribute\ReadCapacityUnits;
 use JLucki\ODM\Spark\Attribute\TableName;
@@ -114,7 +113,7 @@ class User extends Item implements UserInterface
      */
     public function eraseCredentials()
     {
-        // TODO: Implement eraseCredentials() method.
+        $this->setPassword('');
     }
 
     /**

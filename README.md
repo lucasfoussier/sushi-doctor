@@ -16,4 +16,10 @@ docker-compose exec php php bin/console app:update-dynamo-db --delete
 > Regenerate JWT certificates (dev)
 docker-compose exec php php bin/console lexik:jwt:generate-keypair  --overwrite
 ```
+```
+> Start the containers
+docker-compose up -d
+> Watch for front complation errors and linter warnings
+docker-compose logs -f yarn-dev
+```
 
