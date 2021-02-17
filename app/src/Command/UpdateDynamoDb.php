@@ -5,7 +5,6 @@ use App\Entity\Article;
 use App\Entity\Rikudou;
 use App\Entity\UserRefreshToken;
 use App\Entity\User;
-use Aws\DynamoDb\Exception\DynamoDbException;
 use JLucki\ODM\Spark\Exception\TableAlreadyExistsException;
 use JLucki\ODM\Spark\Exception\TableDoesNotExistException;
 use JLucki\ODM\Spark\Spark;
@@ -46,7 +45,7 @@ class UpdateDynamoDb extends Command
         }
         $schemas = [
             Article::class,
-//            Rikudou::class,
+            Rikudou::class,
             User::class,
             UserRefreshToken::class
         ];
@@ -75,7 +74,8 @@ class UpdateDynamoDb extends Command
                 try {
                     $this->spark->createTable($schema);
                     $createdTableCount++;
-                } catch (TableAlreadyExistsException $e) {}
+                } catch (TableAlreadyExistsException $e) {
+                }
             }
         }
         $output->writeln($createdTableCount.' table(s) created');

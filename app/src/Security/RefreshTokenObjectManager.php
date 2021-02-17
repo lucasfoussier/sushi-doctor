@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Security;
 
+use App\Entity\UserRefreshToken;
 use App\Repository\UserRefreshTokenRepository;
 use Doctrine\Persistence\ObjectManager;
-use JLucki\ODM\Spark\Interface\ItemInterface;
+use JLucki\ODM\Spark\Exception\ItemActionFailedException;
 use JLucki\ODM\Spark\Spark;
 
 class RefreshTokenObjectManager implements ObjectManager
@@ -16,10 +16,22 @@ class RefreshTokenObjectManager implements ObjectManager
         private Spark $spark
     ){}
 
+    /**
+     * @param object $object
+     * @throws ItemActionFailedException
+     */
     public function persist($object)
     {
-        /* @var $object ItemInterface */
-        $this->spark->putItem($object);
+        /* @var $object UserRefreshToken */
+        $itemByKey = $this->spark->getItem(UserRefreshToken::class, [
+            'refreshToken' => $object->getRefreshToken(),
+        ]);
+        if(is_null($itemByKey)){
+            $this->spark->putItem($object);
+        } else {
+            $this->spark->deleteItem($itemByKey);
+            $this->spark->putItem($object);
+        }
     }
 
     public function getRepository($className)
@@ -39,7 +51,7 @@ class RefreshTokenObjectManager implements ObjectManager
 
     public function remove($object)
     {
-        // Unused in RefreshToken context
+        $this->spark->deleteItem($object);
     }
 
     public function merge($object)

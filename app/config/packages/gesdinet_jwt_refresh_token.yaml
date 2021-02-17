@@ -5,3 +5,4 @@ gesdinet_jwt_refresh_token:
   user_provider: App\Security\UserProvider
   object_manager: App\Security\RefreshTokenObjectManager
   refresh_token_class: App\RefreshToken\JwtRefreshToken
+  ttl_update: true

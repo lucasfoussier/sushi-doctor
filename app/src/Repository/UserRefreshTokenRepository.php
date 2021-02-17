@@ -3,8 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\UserRefreshToken;
-use Doctrine\ORM\NonUniqueResultException;
-use JLucki\ODM\Spark\Exception\ItemActionFailedException;
+use DateTime;
 use JLucki\ODM\Spark\Exception\QueryException;
 use JLucki\ODM\Spark\Query\Expression;
 use JLucki\ODM\Spark\Query\Query;
@@ -35,11 +34,30 @@ class UserRefreshTokenRepository
     {
         $userRefreshToken = $this->getQueryBuilder();
         foreach ($params as $key => $value){
-            $userRefreshToken->indexName($key);
             $userRefreshToken->findBy((new Expression())->attribute($key)->value($value));
         }
         /* @var $result UserRefreshToken */
         $result = $userRefreshToken->getFirst();
         return $result;
     }
+
+    /**
+     * @param DateTime|null $datetime
+     * @return UserRefreshToken[]
+     */
+    public function findInvalid(DateTime $datetime = null)
+    {
+        $allItems = $this->spark->scan(UserRefreshToken::class);
+        $datetime = (null === $datetime) ? new DateTime() : $datetime;
+        foreach ($allItems as $key => $value){
+            if ($value->getValid() >= $datetime){
+                unset($allItems[$key]);
+            }
+        }
+        $allItems = array_values($allItems);
+        /* @var $allItems UserRefreshToken[] */
+        return $allItems;
+    }
+
+
 }

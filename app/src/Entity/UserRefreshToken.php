@@ -7,6 +7,7 @@ use JLucki\ODM\Spark\Attribute\AttributeName;
 use JLucki\ODM\Spark\Attribute\AttributeType;
 use JLucki\ODM\Spark\Attribute\GlobalSecondaryIndex;
 use JLucki\ODM\Spark\Attribute\KeyType;
+use JLucki\ODM\Spark\Attribute\OpenAttribute;
 use JLucki\ODM\Spark\Attribute\ProjectionType;
 use JLucki\ODM\Spark\Attribute\TableName;
 use JLucki\ODM\Spark\Attribute\WriteCapacityUnits;
@@ -25,31 +26,19 @@ class UserRefreshToken extends Item implements RefreshTokenInterface
 
     #[
         KeyType('HASH'),
-        AttributeName('id'),
-        AttributeType('S'),
-    ]
-    private string $id;
-
-    #[
-        KeyType('HASH'),
         AttributeName('refreshToken'),
         AttributeType('S'),
-        GlobalSecondaryIndex,
-        WriteCapacityUnits(1),
-        ReadCapacityUnits(1),
-        ProjectionType(ProjectionType::ALL),
     ]
     private string $refreshToken;
 
     #[
-        AttributeName('username'),
+        OpenAttribute('username'),
         AttributeType('S'),
     ]
     private string $username;
 
     #[
-        KeyType('RANGE'),
-        AttributeName('valid'),
+        OpenAttribute('valid'),
         AttributeType('N'),
     ]
     private DateTime $valid;
@@ -57,13 +46,7 @@ class UserRefreshToken extends Item implements RefreshTokenInterface
 
     public function getId()
     {
-        return $this->id;
-    }
-
-    public function __construct()
-    {
-        $this->id = Uuid::uuid4()->toString();
-        parent::__construct();
+        return $this->refreshToken;
     }
 
     /**
@@ -77,7 +60,8 @@ class UserRefreshToken extends Item implements RefreshTokenInterface
     {
         $this->refreshToken = null === $refreshToken
             ? bin2hex(openssl_random_pseudo_bytes(64))
-            : $refreshToken;
+            : $refreshToken
+        ;
 
         return $this;
     }
