@@ -54,7 +54,7 @@ functions:
       - ${bref:layer.php-74}
     events:
       - sqs:
-          arn: arn:aws:sqs:${env:AWS_DEPLOYMENT_REGION}:${env:AWS_QUEUE_ID}:sushi-doctor_${opt:stage}_queue
+          arn: arn:aws:sqs:${env:AWS_DEPLOYMENT_REGION}:${env:AWS_QUEUE_ID}:sushi-doctr_${opt:stage}_queue
           batchSize: 1
 resources:
   Resources:
