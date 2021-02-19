@@ -1,0 +1,9 @@
+framework:
+    messenger:
+        transports:
+            async: 'https://sqs.%aws.deployment.region%.amazonaws.com/%aws.queue.id%/%app.name%_%app.stage%_queue'
+        routing:
+            App\Message\SmsNotification: async
+
+
+#MESSENGER_TRANSPORT_DSN=https://AKIAIOSFODNN7EXAMPLE:j17M97ffSVoKI0briFoo9a@sqs.eu-west-3.amazonaws.com/123456789012/messages

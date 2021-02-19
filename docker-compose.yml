@@ -45,3 +45,17 @@ services:
       - dynamodb-local
     ports:
       - 3001:8001
+#  amazon-sqs:
+#    image: roribio16/alpine-sqs:latest
+#    container_name: amazon-sqs
+#    ports:
+#      - "9324:9324" #TODO : remove
+#      - "9325:9325"
+#    stdin_open: true
+#    tty: true
+  amazon-sqs:
+    image: roribio16/alpine-sqs
+    ports:
+      - "9325:9325"
+    volumes:
+      - ./elasticmq.conf:/opt/config/elasticmq.conf

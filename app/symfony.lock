@@ -2,8 +2,17 @@
     "async-aws/core": {
         "version": "1.8.0"
     },
+    "async-aws/event-bridge": {
+        "version": "1.1.0"
+    },
     "async-aws/lambda": {
         "version": "1.2.0"
+    },
+    "async-aws/sns": {
+        "version": "1.2.0"
+    },
+    "async-aws/sqs": {
+        "version": "1.5.0"
     },
     "aws/aws-sdk-php": {
         "version": "3.172.3"
@@ -22,6 +31,9 @@
     },
     "bref/bref": {
         "version": "1.1.4"
+    },
+    "bref/symfony-messenger": {
+        "version": "0.4.0"
     },
     "brick/math": {
         "version": "0.9.2"
@@ -261,6 +273,12 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/amazon-sqs-messenger": {
+        "version": "v5.2.3"
+    },
+    "symfony/amqp-messenger": {
+        "version": "v5.2.3"
+    },
     "symfony/asset": {
         "version": "v5.2.2"
     },
@@ -314,6 +332,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v5.2.2"
+    },
+    "symfony/doctrine-messenger": {
+        "version": "v5.2.3"
     },
     "symfony/dom-crawler": {
         "version": "v5.2.2"
@@ -410,6 +431,18 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "e9a414b113ceadbf4e52abe37bf8f1b443f06ccb"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v5.2.2"
     },
@@ -502,6 +535,9 @@
     },
     "symfony/proxy-manager-bridge": {
         "version": "v5.2.2"
+    },
+    "symfony/redis-messenger": {
+        "version": "v5.2.3"
     },
     "symfony/routing": {
         "version": "5.1",

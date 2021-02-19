@@ -2,13 +2,16 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Message\SmsNotification;
 use App\Repository\UserRepository;
+use App\Service\ResponseService;
 use DateTime;
 use JLucki\ODM\Spark\Spark;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -34,6 +37,23 @@ class DefaultController extends AbstractController
         ]);
 //        die('fdsq');
 
+    }
+
+    #[
+        Route("/api/message", name:"message")
+    ]
+    public function message(
+        MessageBusInterface $bus,
+        ResponseService $responseService
+    ): Response
+    {
+
+        $bus->dispatch(new SmsNotification('Look! I created a message!'));
+
+//        or use the shortcut
+//        $this->dispatchMessage(new SmsNotification('Look! I created a message!'));
+
+        return $responseService->getOk();
     }
 
 

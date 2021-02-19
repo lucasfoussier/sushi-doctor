@@ -31,6 +31,10 @@ class ResponseService
         return new JsonResponse($this->serializer->serialize($response, 'json',  ['groups' => 'response']), $response->getCode(), $headers, true);
     }
 
+    public function getOk($message = null){
+        return $this->getResponse((object) [], $message);
+    }
+
 
     public function getError(int $code, string $message, array $headers = []): JsonResponse
     {

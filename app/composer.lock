@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "554ac0d7da42ef50d39687e2174dfc0a",
+    "content-hash": "6bbcd0eb0f1c1676447325a3f9980b88",
     "packages": [
         {
             "name": "async-aws/core",
@@ -74,6 +74,63 @@
             "time": "2021-02-01T21:10:42+00:00"
         },
         {
+            "name": "async-aws/event-bridge",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/async-aws/event-bridge.git",
+                "reference": "584e2c35e257d382a9c27fd928d51cb2280d3542"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/async-aws/event-bridge/zipball/584e2c35e257d382a9c27fd928d51cb2280d3542",
+                "reference": "584e2c35e257d382a9c27fd928d51cb2280d3542",
+                "shasum": ""
+            },
+            "require": {
+                "async-aws/core": "^1.9",
+                "ext-json": "*",
+                "php": "^7.2.5 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AsyncAws\\EventBridge\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "EventBridge client, part of the AWS SDK provided by AsyncAws.",
+            "keywords": [
+                "amazon",
+                "async-aws",
+                "aws",
+                "event-bridge",
+                "sdk"
+            ],
+            "support": {
+                "source": "https://github.com/async-aws/event-bridge/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jderusse",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-01T21:10:42+00:00"
+        },
+        {
             "name": "async-aws/lambda",
             "version": "1.3.0",
             "source": {
@@ -117,6 +174,120 @@
             ],
             "support": {
                 "source": "https://github.com/async-aws/lambda/tree/1.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jderusse",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-01T21:10:42+00:00"
+        },
+        {
+            "name": "async-aws/sns",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/async-aws/sns.git",
+                "reference": "e4e2ed0d16011e2587ec50e5ceeb77a4fe17f89e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/async-aws/sns/zipball/e4e2ed0d16011e2587ec50e5ceeb77a4fe17f89e",
+                "reference": "e4e2ed0d16011e2587ec50e5ceeb77a4fe17f89e",
+                "shasum": ""
+            },
+            "require": {
+                "async-aws/core": "^1.9",
+                "ext-simplexml": "*",
+                "php": "^7.2.5 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AsyncAws\\Sns\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "SNS client, part of the AWS SDK provided by AsyncAws.",
+            "keywords": [
+                "SNS",
+                "amazon",
+                "async-aws",
+                "aws",
+                "sdk"
+            ],
+            "support": {
+                "source": "https://github.com/async-aws/sns/tree/1.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jderusse",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-01T21:10:42+00:00"
+        },
+        {
+            "name": "async-aws/sqs",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/async-aws/sqs.git",
+                "reference": "41addaab382b0fbc1e161d233db1f48aca8725e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/async-aws/sqs/zipball/41addaab382b0fbc1e161d233db1f48aca8725e7",
+                "reference": "41addaab382b0fbc1e161d233db1f48aca8725e7",
+                "shasum": ""
+            },
+            "require": {
+                "async-aws/core": "^1.9",
+                "ext-simplexml": "*",
+                "php": "^7.2.5 || ^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AsyncAws\\Sqs\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "SQS client, part of the AWS SDK provided by AsyncAws.",
+            "keywords": [
+                "amazon",
+                "async-aws",
+                "aws",
+                "sdk",
+                "sqs"
+            ],
+            "support": {
+                "source": "https://github.com/async-aws/sqs/tree/1.5.0"
             },
             "funding": [
                 {
@@ -352,6 +523,74 @@
                 }
             ],
             "time": "2021-02-04T14:31:08+00:00"
+        },
+        {
+            "name": "bref/symfony-messenger",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brefphp/symfony-messenger.git",
+                "reference": "df62881ce95857cb46112c0dd032cd7491735aec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brefphp/symfony-messenger/zipball/df62881ce95857cb46112c0dd032cd7491735aec",
+                "reference": "df62881ce95857cb46112c0dd032cd7491735aec",
+                "shasum": ""
+            },
+            "require": {
+                "async-aws/event-bridge": "^1.0",
+                "async-aws/sns": "^1.0",
+                "async-aws/sqs": "^1.2",
+                "bref/bref": "^0.5.18 || ^1.0",
+                "ext-json": "*",
+                "php": ">=7.3",
+                "symfony/amazon-sqs-messenger": "^5.2",
+                "symfony/config": "^4.3 || ^5.0",
+                "symfony/dependency-injection": "^4.3 || ^5.0",
+                "symfony/http-kernel": "^4.3 || ^5.0",
+                "symfony/messenger": "^4.3 || ^5.0",
+                "symfony/yaml": "^4.3 || ^5.0"
+            },
+            "require-dev": {
+                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+                "mnapoli/hard-mode": "^0.3.0",
+                "nyholm/symfony-bundle-test": "^1.6",
+                "phpstan/phpstan": "^0.12.0",
+                "phpunit/phpunit": "^9.4",
+                "symfony/framework-bundle": "^4.3 || ^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bref\\Symfony\\Messenger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Symfony Messenger bridge to run with SQS and SNS on AWS Lambda with Bref",
+            "keywords": [
+                "Messenger",
+                "SNS",
+                "aws",
+                "aws-lambda",
+                "bref",
+                "sqs",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/brefphp/symfony-messenger/issues",
+                "source": "https://github.com/brefphp/symfony-messenger/tree/0.4.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/mnapoli",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-12-11T13:57:54+00:00"
         },
         {
             "name": "brick/math",
@@ -4445,6 +4684,144 @@
             "time": "2020-08-25T19:10:18+00:00"
         },
         {
+            "name": "symfony/amazon-sqs-messenger",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/amazon-sqs-messenger.git",
+                "reference": "eff2a5c1cd6a1b727cbe7564c9c2f8e873bf1ec5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/amazon-sqs-messenger/zipball/eff2a5c1cd6a1b727cbe7564c9c2f8e873bf1ec5",
+                "reference": "eff2a5c1cd6a1b727cbe7564c9c2f8e873bf1ec5",
+                "shasum": ""
+            },
+            "require": {
+                "async-aws/sqs": "^1.0",
+                "php": ">=7.2.5",
+                "symfony/messenger": "^4.3|^5.0",
+                "symfony/service-contracts": "^1.1|^2"
+            },
+            "require-dev": {
+                "symfony/http-client-contracts": "^1.0|^2.0",
+                "symfony/property-access": "^4.4|^5.0",
+                "symfony/serializer": "^4.4|^5.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\Bridge\\AmazonSqs\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Amazon SQS extension Messenger Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/amazon-sqs-messenger/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T11:24:50+00:00"
+        },
+        {
+            "name": "symfony/amqp-messenger",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/amqp-messenger.git",
+                "reference": "cf309a35ed08caa77886ee6a352b8491c7681424"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/amqp-messenger/zipball/cf309a35ed08caa77886ee6a352b8491c7681424",
+                "reference": "cf309a35ed08caa77886ee6a352b8491c7681424",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/messenger": "^5.1"
+            },
+            "require-dev": {
+                "symfony/event-dispatcher": "^4.4|^5.0",
+                "symfony/process": "^4.4|^5.0",
+                "symfony/property-access": "^4.4|^5.0",
+                "symfony/serializer": "^4.4|^5.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\Bridge\\Amqp\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony AMQP extension Messenger Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/amqp-messenger/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T11:19:04+00:00"
+        },
+        {
             "name": "symfony/asset",
             "version": "v5.2.3",
             "source": {
@@ -5129,6 +5506,79 @@
                 }
             ],
             "time": "2021-02-03T04:42:09+00:00"
+        },
+        {
+            "name": "symfony/doctrine-messenger",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/doctrine-messenger.git",
+                "reference": "012895a6e4ae1874dd466b39695a2821d31d6309"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/doctrine-messenger/zipball/012895a6e4ae1874dd466b39695a2821d31d6309",
+                "reference": "012895a6e4ae1874dd466b39695a2821d31d6309",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/messenger": "^5.1",
+                "symfony/service-contracts": "^1.1|^2"
+            },
+            "conflict": {
+                "doctrine/dbal": "<2.10",
+                "doctrine/persistence": "<1.3"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^2.10|^3.0",
+                "doctrine/persistence": "^1.3|^2",
+                "symfony/property-access": "^4.4|^5.0",
+                "symfony/serializer": "^4.4|^5.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\Bridge\\Doctrine\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Doctrine Messenger Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/doctrine-messenger/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-02-01T14:36:03+00:00"
         },
         {
             "name": "symfony/dotenv",
@@ -6455,6 +6905,94 @@
                 }
             ],
             "time": "2021-02-02T06:10:15+00:00"
+        },
+        {
+            "name": "symfony/messenger",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/messenger.git",
+                "reference": "ce658034cd7884428a8c6f50c2d4f8cf66348c40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/messenger/zipball/ce658034cd7884428a8c6f50c2d4f8cf66348c40",
+                "reference": "ce658034cd7884428a8c6f50c2d4f8cf66348c40",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "psr/log": "~1.0",
+                "symfony/amqp-messenger": "^5.1",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/doctrine-messenger": "^5.1",
+                "symfony/polyfill-php80": "^1.15",
+                "symfony/redis-messenger": "^5.1"
+            },
+            "conflict": {
+                "symfony/event-dispatcher": "<4.4",
+                "symfony/framework-bundle": "<4.4",
+                "symfony/http-kernel": "<4.4"
+            },
+            "require-dev": {
+                "psr/cache": "~1.0",
+                "symfony/console": "^4.4|^5.0",
+                "symfony/dependency-injection": "^4.4|^5.0",
+                "symfony/event-dispatcher": "^4.4|^5.0",
+                "symfony/http-kernel": "^4.4|^5.0",
+                "symfony/process": "^4.4|^5.0",
+                "symfony/property-access": "^4.4|^5.0",
+                "symfony/serializer": "^4.4|^5.0",
+                "symfony/service-contracts": "^1.1|^2",
+                "symfony/stopwatch": "^4.4|^5.0",
+                "symfony/validator": "^4.4|^5.0"
+            },
+            "suggest": {
+                "enqueue/messenger-adapter": "For using the php-enqueue library as a transport."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Samuel Roze",
+                    "email": "samuel.roze@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Helps applications send and receive messages to/from other applications or via message queues",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/messenger/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T11:24:50+00:00"
         },
         {
             "name": "symfony/mime",
@@ -7802,6 +8340,73 @@
                 }
             ],
             "time": "2021-01-27T10:01:46+00:00"
+        },
+        {
+            "name": "symfony/redis-messenger",
+            "version": "v5.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/redis-messenger.git",
+                "reference": "7e68914bf35cda948ee4d9081b8eaed9fd783fe5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/redis-messenger/zipball/7e68914bf35cda948ee4d9081b8eaed9fd783fe5",
+                "reference": "7e68914bf35cda948ee4d9081b8eaed9fd783fe5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/deprecation-contracts": "^2.1",
+                "symfony/messenger": "^5.1"
+            },
+            "require-dev": {
+                "symfony/property-access": "^4.4|^5.0",
+                "symfony/serializer": "^4.4|^5.0"
+            },
+            "type": "symfony-bridge",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Messenger\\Bridge\\Redis\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Redis extension Messenger Bridge",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/redis-messenger/tree/v5.2.3"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-01-27T11:24:50+00:00"
         },
         {
             "name": "symfony/routing",

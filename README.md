@@ -22,4 +22,6 @@ docker-compose up -d
 > Watch for front complation errors and linter warnings
 docker-compose logs -f yarn-dev
 ```
-
+```
+docker-compose exec php php bin/console messenger:consume async --failure-limit=1 -vv
+```

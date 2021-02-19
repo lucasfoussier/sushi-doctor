@@ -17,4 +17,5 @@ return [
     Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
     Rikudou\DynamoDbCacheBundle\RikudouDynamoDbCacheBundle::class => ['all' => true],
     Gesdinet\JWTRefreshTokenBundle\GesdinetJWTRefreshTokenBundle::class => ['all' => true],
+    Bref\Symfony\Messenger\BrefMessengerBundle::class => ['all' => true],
 ];
