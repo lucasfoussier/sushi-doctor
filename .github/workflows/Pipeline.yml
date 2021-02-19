@@ -43,16 +43,16 @@ jobs:
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4
-#    - name: Validation of Composer configuration
-#      run: composer validate
-#    - name: Building Front with Webpack Encore
-#      run: yarn install && yarn build
+    - name: Validation of Composer configuration
+      run: composer validate
+    - name: Building Front with Webpack Encore
+      run: yarn install && yarn build
     - name: Installing Composer production dependencies
       run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress --no-interaction --no-scripts
-#    - name: Warming up Symfony cache
-#      run: php bin/console cache:clear --no-debug --no-warmup --env=${APP_ENV} && php bin/console cache:warmup --env=${APP_ENV}
-#    - name: Generating JWT certificates
-#      run: php bin/console lexik:jwt:generate-keypair --no-interaction --env=${APP_ENV} --quiet --overwrite
+    - name: Warming up Symfony cache
+      run: php bin/console cache:clear --no-debug --no-warmup --env=${APP_ENV} && php bin/console cache:warmup --env=${APP_ENV}
+    - name: Generating JWT certificates
+      run: php bin/console lexik:jwt:generate-keypair --no-interaction --env=${APP_ENV} --quiet --overwrite
     - name: Configuring Serverless CLI
       run: sudo npm install -g serverless && serverless config credentials --provider aws --key ${AWS_KEY} --secret ${AWS_SECRET} --stage ${APP_STAGE}
     - name: Deploying Web Lambda and CLI Lambda
