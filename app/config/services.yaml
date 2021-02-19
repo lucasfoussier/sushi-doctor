@@ -2,6 +2,7 @@ parameters:
     app.stage: "%env(string:APP_STAGE)%"
     app.secret: "%env(string:APP_SECRET)%"
     app.env: "%env(string:APP_ENV)%"
+    app.name: "%env(string:APP_NAME)%"
     jwt.keys.directory: "%kernel.project_dir%/%env(string:JWT_KEYS_DIRECTORY)%"
     jwt.cookie.secure: "%env(bool:JWT_COOKIE_SECURE)%"
     jwt.cookie.path: "/api"
