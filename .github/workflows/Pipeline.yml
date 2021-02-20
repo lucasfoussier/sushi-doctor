@@ -43,10 +43,10 @@ jobs:
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4
-    - name: Validation of Composer configuration
-      run: composer validate
-    - name: Building Front with Webpack Encore
-      run: yarn install && yarn build
+#    - name: Validation of Composer configuration
+#      run: composer validate
+#    - name: Building Front with Webpack Encore
+#      run: yarn install && yarn build
     - name: Installing Composer production dependencies
       run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress --no-interaction --no-scripts
     - name: Warming up Symfony cache
