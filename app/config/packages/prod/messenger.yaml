@@ -2,7 +2,7 @@ framework:
     messenger:
         transports:
 #            async: 'https://sqs.%aws.deployment.region%.amazonaws.com/%aws.queue.id%/%app.name%_%app.stage%_queue'
-            async: 'https://sqs.eu-west-1.amazonaws.com/907147359096/sushi-doctor_production_queue'
+            async: 'https://sqs.eu-west-1.amazonaws.com/907147359096/sushi-doctor_production_queue?access_key=%aws.key%&secret_key=%aws.secret%&region=%aws.deployment.region%'
         routing:
             App\Message\SmsNotification: async
 
