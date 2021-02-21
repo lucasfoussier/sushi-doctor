@@ -2,5 +2,3 @@ framework:
     messenger:
         transports:
             async: 'https://sqs.%aws.deployment.region%.amazonaws.com/%aws.queue.id%/%app.name%_%app.stage%_queue'
-        routing:
-            App\Message\SmsNotification: async
