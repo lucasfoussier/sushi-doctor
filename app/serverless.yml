@@ -29,7 +29,7 @@ package:
     - public/assets/**
     - node_modules/**
 functions:
-  website:
+  website: #todo: attach AmazonSQSFullAccess
     handler: public/index.php
     timeout: 28
     layers:
@@ -51,7 +51,7 @@ functions:
     timeout: 20
     reservedConcurrency: 5
     layers:
-      - ${bref:layer.php-74}
+      - ${bref:layer.php-80}
     events:
       - sqs:
           arn: arn:aws:sqs:${env:AWS_DEPLOYMENT_REGION}:${env:AWS_QUEUE_ID}:sushi-doctor_${opt:stage}_queue

@@ -25,3 +25,4 @@ docker-compose logs -f yarn-dev
 ```
 docker-compose exec php php bin/console messenger:consume async --failure-limit=1 -vv
 ```
+https://github.com/brefphp/examples/tree/master/Symfony/sqs#deploy
