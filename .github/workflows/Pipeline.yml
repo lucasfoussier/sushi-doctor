@@ -6,22 +6,22 @@ defaults:
   run:
     working-directory: ./app
 jobs:
-#  lint-front:
-#    name: 'React Eslint'
-#    runs-on: Ubuntu-20.04
-#    steps:
-#    - uses: actions/checkout@v2.3.4
-#    - name: Eslint
-#      run: yarn install && yarn lint
-#  lint-back:
-#    name: 'PHP Tests'
-#    runs-on: Ubuntu-20.04
-#    steps:
-#    - uses: actions/checkout@v2.3.4
-#    - name: Eslint
-#      run: yarn install && yarn lint
+  lint-front:
+    name: 'React Eslint'
+    runs-on: Ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - name: Eslint
+      run: yarn install && yarn lint
+  lint-back:
+    name: 'PHP Tests'
+    runs-on: Ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2.3.4
+    - name: Eslint
+      run: yarn install && yarn lint
   deploy-production:
-#    needs: [lint-front, lint-back]
+    needs: [lint-front, lint-back]
     name: 'Production Deployment to AWS'
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment: production
@@ -43,10 +43,10 @@ jobs:
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4
-#    - name: Validation of Composer configuration
-#      run: composer validate
-#    - name: Building Front with Webpack Encore
-#      run: yarn install && yarn build
+    - name: Validation of Composer configuration
+      run: composer validate
+    - name: Building Front with Webpack Encore
+      run: yarn install && yarn build
     - name: Installing Composer production dependencies
       run: composer install --no-dev --optimize-autoloader --prefer-dist --no-progress --no-interaction --no-scripts
     - name: Warming up Symfony cache

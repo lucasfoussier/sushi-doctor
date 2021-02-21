@@ -29,7 +29,7 @@ package:
     - public/assets/**
     - node_modules/**
 functions:
-  website: #todo: attach AmazonSQSFullAccess
+  website: # ToDo: attach AmazonSQSFullAccess
     handler: public/index.php
     timeout: 28
     layers:
