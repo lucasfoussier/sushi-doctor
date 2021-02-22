@@ -34,7 +34,7 @@ class MyHandler extends WebsocketHandler
 
             case 'DISCONNECT':
                 $dynamoDb->deleteItem([
-                    'TableName' => 'connectionPool',
+                    'TableName' => 'websocket.pool',
                     'Key' => [
                         'connectionId' => [
                             'S' => $event->getConnectionId(),
@@ -47,7 +47,7 @@ class MyHandler extends WebsocketHandler
             default:
                 if ($event->getBody() === 'ping') {
                     foreach ($dynamoDb->scan([
-                         'TableName' => 'connectionPool',
+                         'TableName' => 'websocket.pool',
                     ])->getItems() as $item) {
                         $connectionId = $item['connectionId']->getS();
                         $client = SimpleWebsocketClient::create(

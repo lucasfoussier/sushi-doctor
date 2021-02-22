@@ -19,7 +19,7 @@ provider:
     AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
     AWS_DYNAMO_DB_ENDPOINT: ${env:AWS_DYNAMO_DB_ENDPOINT}
     AWS_QUEUE_ID: ${env:AWS_QUEUE_ID}
-  iamRoleStatements:
+  provider.iam.role.statements:
     - Effect: Allow
       Action:
         - dynamodb:Scan
