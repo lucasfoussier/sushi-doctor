@@ -49,5 +49,4 @@ services:
         public: true
         autowire: true
         arguments:
-            # Pass the transport name used in config/packages/messenger.yaml
             $transportName: 'async'

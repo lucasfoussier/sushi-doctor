@@ -8,15 +8,15 @@ use Bref\Websocket\SimpleWebsocketClient;
 use AsyncAws\DynamoDb\Input\PutItemInput;
 use AsyncAws\DynamoDb\ValueObject\AttributeValue;
 use AsyncAws\DynamoDb\DynamoDbClient;
-use Bref\Symfony\Messenger\Service\Sqs\SqsConsumer;
 use Symfony\Component\Dotenv\Dotenv;
+use JLucki\ODM\Spark\Spark;
 
-//require __DIR__ . '/../vendor/autoload.php';
 require dirname(__DIR__).'/vendor/autoload.php';
 
 class MyHandler extends WebsocketHandler
 {
 
+    private Spark $spark;
 
     public function __construct()
     {
@@ -44,7 +44,9 @@ class MyHandler extends WebsocketHandler
 
         $kernel = new \App\Kernel($_SERVER['APP_ENV'], (bool)$_SERVER['APP_DEBUG']);
         $kernel->boot();
-
+        /* @var $spark Spark*/
+        $spark = $kernel->getContainer()->get(Spark::class);
+        $this->spark = $spark;
     }
 
     public function handleWebsocket(WebsocketEvent $event, Context $context): HttpResponse
