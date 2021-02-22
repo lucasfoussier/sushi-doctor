@@ -58,16 +58,12 @@ class MyHandler extends WebsocketHandler
 
         switch ($event->getEventType()) {
             case 'CONNECT':
-
                 $websocketPool = new WebsocketPool();
                 $websocketPool->setConnectionId($event->getConnectionId());
                 $websocketPool->setApiId($event->getApiId());
                 $websocketPool->setRegion($event->getRegion());
                 $websocketPool->setStage($event->getStage());
-
-
                 $this->spark->putItem($websocketPool);
-
 //                $dynamoDb->putItem(new PutItemInput([
 //                    'TableName' => 'websocket.pool',
 //                    'Item' => [
@@ -77,16 +73,12 @@ class MyHandler extends WebsocketHandler
 //                        'stage' => new AttributeValue(['S' => $event->getStage()]),
 //                    ],
 //                ]));
-
                 return new HttpResponse('connect');
-
             case 'DISCONNECT':
-
                 $currentPool = $this->spark->getItem(WebsocketPool::class, [
                     'connectionId' => $event->getConnectionId(),
                 ]);
                 $this->spark->deleteItem($currentPool);
-
 //                $dynamoDb->deleteItem([
 //                    'TableName' => 'websocket.pool',
 //                    'Key' => [
@@ -95,9 +87,7 @@ class MyHandler extends WebsocketHandler
 //                        ],
 //                    ]
 //                ]);
-
                 return new HttpResponse('disconnect');
-
             default:
                 if ($event->getBody() === 'ping') {
                     foreach ($dynamoDb->scan([
@@ -111,7 +101,6 @@ class MyHandler extends WebsocketHandler
                         );
                         $client->message($connectionId, 'pong');
                         $status = $client->status($connectionId);
-
                         echo json_encode($status->toArray());
                     }
                 }
