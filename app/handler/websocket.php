@@ -10,6 +10,7 @@ use AsyncAws\DynamoDb\ValueObject\AttributeValue;
 use AsyncAws\DynamoDb\DynamoDbClient;
 use Symfony\Component\Dotenv\Dotenv;
 use JLucki\ODM\Spark\Spark;
+use App\Entity\WebsocketPool;
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
@@ -57,27 +58,43 @@ class MyHandler extends WebsocketHandler
 
         switch ($event->getEventType()) {
             case 'CONNECT':
-                $dynamoDb->putItem(new PutItemInput([
-                    'TableName' => 'websocket.pool',
-                    'Item' => [
-                        'connectionId' => new AttributeValue(['S' => $event->getConnectionId()]),
-                        'apiId' => new AttributeValue(['S' => $event->getApiId()]),
-                        'region' => new AttributeValue(['S' => $event->getRegion()]),
-                        'stage' => new AttributeValue(['S' => $event->getStage()]),
-                    ],
-                ]));
+
+                $websocketPool = new WebsocketPool();
+                $websocketPool->setConnectionId($event->getConnectionId());
+                $websocketPool->setApiId($event->getApiId());
+                $websocketPool->setRegion($event->getRegion());
+                $websocketPool->setStage($event->getStage());
+
+
+                $this->spark->putItem($websocketPool);
+
+//                $dynamoDb->putItem(new PutItemInput([
+//                    'TableName' => 'websocket.pool',
+//                    'Item' => [
+//                        'connectionId' => new AttributeValue(['S' => $event->getConnectionId()]),
+//                        'apiId' => new AttributeValue(['S' => $event->getApiId()]),
+//                        'region' => new AttributeValue(['S' => $event->getRegion()]),
+//                        'stage' => new AttributeValue(['S' => $event->getStage()]),
+//                    ],
+//                ]));
 
                 return new HttpResponse('connect');
 
             case 'DISCONNECT':
-                $dynamoDb->deleteItem([
-                    'TableName' => 'websocket.pool',
-                    'Key' => [
-                        'connectionId' => [
-                            'S' => $event->getConnectionId(),
-                        ],
-                    ]
+
+                $currentPool = $this->spark->getItem(WebsocketPool::class, [
+                    'connectionId' => $event->getConnectionId(),
                 ]);
+                $this->spark->deleteItem($currentPool);
+
+//                $dynamoDb->deleteItem([
+//                    'TableName' => 'websocket.pool',
+//                    'Key' => [
+//                        'connectionId' => [
+//                            'S' => $event->getConnectionId(),
+//                        ],
+//                    ]
+//                ]);
 
                 return new HttpResponse('disconnect');
 
