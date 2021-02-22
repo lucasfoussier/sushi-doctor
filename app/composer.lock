@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bbcd0eb0f1c1676447325a3f9980b88",
+    "content-hash": "e7524c6b536b35b57a0f82ae4b0b055f",
     "packages": [
         {
             "name": "async-aws/core",
@@ -60,6 +60,67 @@
             ],
             "support": {
                 "source": "https://github.com/async-aws/core/tree/1.9.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/jderusse",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nyholm",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-02-01T21:10:42+00:00"
+        },
+        {
+            "name": "async-aws/dynamo-db",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/async-aws/dynamo-db.git",
+                "reference": "811d15c9079f6d932262fb93c20df22e260b9249"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/async-aws/dynamo-db/zipball/811d15c9079f6d932262fb93c20df22e260b9249",
+                "reference": "811d15c9079f6d932262fb93c20df22e260b9249",
+                "shasum": ""
+            },
+            "require": {
+                "async-aws/core": "^1.9",
+                "ext-filter": "*",
+                "ext-json": "*",
+                "php": "^7.2.5 || ^8.0"
+            },
+            "conflict": {
+                "symfony/http-client": "<4.4.16,<5.1.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AsyncAws\\DynamoDb\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DynamoDb client, part of the AWS SDK provided by AsyncAws.",
+            "keywords": [
+                "amazon",
+                "async-aws",
+                "aws",
+                "dynamo-db",
+                "sdk"
+            ],
+            "support": {
+                "source": "https://github.com/async-aws/dynamo-db/tree/1.1.0"
             },
             "funding": [
                 {

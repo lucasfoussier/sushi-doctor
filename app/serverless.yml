@@ -56,6 +56,14 @@ functions:
       - sqs:
           arn: arn:aws:sqs:${env:AWS_DEPLOYMENT_REGION}:${env:AWS_QUEUE_ID}:sushi-doctor_${opt:stage}_queue
           batchSize: 1
+  websocket:
+    handler: handler/websocket.php
+    layers:
+      - ${bref:layer.php-80}
+    events:
+      - websocket: $connect
+      - websocket: $disconnect
+      - websocket: $default
 resources:
   Resources:
     Assets:
@@ -101,7 +109,7 @@ resources:
       Properties:
         DistributionConfig:
           Aliases:
-            - ${env:APP_DOMAIN} # sushi-doctor.com
+            - ${env:APP_DOMAIN}
           ViewerCertificate:
             AcmCertificateArn: ${env:APP_DOMAIN_CERTIFICATE}
             SslSupportMethod: 'sni-only'
@@ -113,7 +121,7 @@ resources:
             -   Id: Website
                 DomainName: !Join ['.', [!Ref HttpApi, 'execute-api', !Ref AWS::Region, 'amazonaws.com']]
                 CustomOriginConfig:
-                  OriginProtocolPolicy: 'https-only' # API Gateway only supports HTTPS
+                  OriginProtocolPolicy: 'https-only'
                 OriginCustomHeaders:
                   -   HeaderName: 'X-Forwarded-Host'
                       HeaderValue: ${env:APP_DOMAIN}
