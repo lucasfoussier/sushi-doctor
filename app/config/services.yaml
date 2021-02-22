@@ -36,11 +36,13 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
     JLucki\ODM\Spark\Spark:
-        $version: 'latest'
-        $region: '%aws.deployment.region%'
-        $endpoint: '%aws.dynamodb.endpoint%'
-        $key: '%aws.key%'
-        $secret: '%aws.secret%'
+        arguments:
+            $version: 'latest'
+            $region: '%aws.deployment.region%'
+            $endpoint: '%aws.dynamodb.endpoint%'
+            $key: '%aws.key%'
+            $secret: '%aws.secret%'
+        public: true
     app.refreshservice:
         class: App\Security\RefreshService
         public: true
