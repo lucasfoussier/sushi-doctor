@@ -53,6 +53,8 @@ class MyHandler extends WebsocketHandler
     {
         $dynamoDb = new DynamoDbClient();
 
+
+
         switch ($event->getEventType()) {
             case 'CONNECT':
                 $dynamoDb->putItem(new PutItemInput([
