@@ -70,10 +70,10 @@ resources:
     WebSocketDomainName:
       Type: AWS::ApiGatewayV2::DomainName
       Properties:
-        DomainName: ws.${env:APP_WS_DOMAIN_CERTIFICATE}
+        DomainName: ws.${env:APP_DOMAIN}
         DomainNameConfigurations:
           - EndpointType: 'REGIONAL'
-            CertificateArn: ${env:APP_DOMAIN}
+            CertificateArn: ${env:APP_WS_DOMAIN_CERTIFICATE}
     WebSocketMapping:
       Type: AWS::ApiGatewayV2::ApiMapping
       Properties:
