@@ -40,6 +40,8 @@ jobs:
       APP_DOMAIN_CERTIFICATE: ${{ secrets.APP_DOMAIN_CERTIFICATE }}
       APP_STAGE: ${{ secrets.APP_STAGE }}
       AWS_QUEUE_ID: ${{ secrets.AWS_QUEUE_ID }}
+      AWS_HOSTED_ZONE_ID: ${{ secrets.AWS_HOSTED_ZONE_ID }}
+      APP_WS_DOMAIN_CERTIFICATE: ${{ secrets.APP_WS_DOMAIN_CERTIFICATE }}
     runs-on: Ubuntu-20.04
     steps:
     - uses: actions/checkout@v2.3.4

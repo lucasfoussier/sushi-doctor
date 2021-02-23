@@ -13,7 +13,6 @@ parameters:
     aws.deployment.region: "%env(string:AWS_DEPLOYMENT_REGION)%"
     aws.dynamodb.endpoint: "%env(string:AWS_DYNAMO_DB_ENDPOINT)%"
     aws.queue.id: '%env(AWS_QUEUE_ID)%'
-
     table.prefix: !php/const DYNAMODB_TABLE_PREFIX
 services:
     _defaults:

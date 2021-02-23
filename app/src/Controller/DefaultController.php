@@ -5,15 +5,12 @@ use App\Entity\User;
 use App\Message\SmsNotification;
 use App\Repository\UserRepository;
 use App\Service\ResponseService;
-use DateTime;
 use JLucki\ODM\Spark\Spark;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Article;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DefaultController extends AbstractController
@@ -35,8 +32,6 @@ class DefaultController extends AbstractController
             'fetchedUser' => $fetchedUser->getId(),
             'user' => $this->getUser()->getUsername()
         ]);
-//        die('fdsq');
-
     }
 
     #[
@@ -47,18 +42,14 @@ class DefaultController extends AbstractController
         ResponseService $responseService
     ): Response
     {
-
         $bus->dispatch(new SmsNotification('Look! I created a message!'));
-
-//        or use the shortcut
 //        $this->dispatchMessage(new SmsNotification('Look! I created a message!'));
-
         return $responseService->getOk();
     }
 
 
     #[
-        Route("/test", name:"test")
+        Route("/user", name:"user")
     ]
     public function test(
         UserRepository $userRepository,
@@ -66,8 +57,6 @@ class DefaultController extends AbstractController
     ): Response
     {
         $user = new User();
-
-
         $user->setPassword(
             $passwordEncoder->encodePassword(
                 $user,
@@ -79,15 +68,7 @@ class DefaultController extends AbstractController
         $user->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
         $userRepository->insertNewUser($user);
 
-
-
-
-
-
-
         return new JsonResponse(['ok']);
-//        die('fdsq');
-
     }
 
 

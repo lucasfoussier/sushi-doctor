@@ -19,13 +19,6 @@ provider:
     AWS_DEPLOYMENT_REGION: ${env:AWS_DEPLOYMENT_REGION}
     AWS_DYNAMO_DB_ENDPOINT: ${env:AWS_DYNAMO_DB_ENDPOINT}
     AWS_QUEUE_ID: ${env:AWS_QUEUE_ID}
-#  provider.iam.role.statements:
-#    - Effect: Allow
-#      Action:
-#        - dynamodb:Scan
-#        - dynamodb:PutItem
-#        - dynamodb:DeleteItem
-#      Resource: "*"
 plugins:
   - ./vendor/bref/bref
 package:
@@ -37,7 +30,7 @@ package:
     - public/assets/**
     - node_modules/**
 functions:
-  website: # ToDo: attach AmazonSQSFullAccess
+  website:
     handler: public/index.php
     timeout: 28
     layers:
@@ -74,6 +67,29 @@ functions:
       - websocket: $default
 resources:
   Resources:
+    WebSocketDomainName:
+      Type: AWS::ApiGatewayV2::DomainName
+      Properties:
+        DomainName: ws.${env:APP_WS_DOMAIN_CERTIFICATE}
+        DomainNameConfigurations:
+          - EndpointType: 'REGIONAL'
+            CertificateArn: ${env:APP_DOMAIN}
+    WebSocketMapping:
+      Type: AWS::ApiGatewayV2::ApiMapping
+      Properties:
+        ApiId: !Ref WebsocketsApi
+        DomainName: !Ref WebSocketDomainName
+        Stage: ${opt:stage}
+        ApiMappingKey: ${opt:stage}
+    DNSRecord:
+      Type: AWS::Route53::RecordSet
+      Properties:
+        HostedZoneId: ${env:AWS_HOSTED_ZONE_ID} #TODO :envise
+        TTL: '900'
+        ResourceRecords:
+          - !GetAtt [ WebSocketDomainName, RegionalDomainName ]
+        Name: ws.${env:APP_DOMAIN}
+        Type: CNAME
     Assets:
       Type: AWS::S3::Bucket
       Properties:
@@ -86,7 +102,7 @@ resources:
     AssetsBucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
-        Bucket: !Ref Assets # Ref for the bucket defined above
+        Bucket: !Ref Assets
         PolicyDocument:
           Statement:
             -   Effect: Allow
