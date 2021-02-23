@@ -13,8 +13,7 @@ use JLucki\ODM\Spark\Attribute\ReadCapacityUnits;
 use JLucki\ODM\Spark\Model\Base\Item;
 
 #[
-//    TableName(DYNAMODB_TABLE_PREFIX.'websocket.pool'),
-    TableName('websocket.pool'), // TODO: add prefix
+    TableName(DYNAMODB_TABLE_PREFIX.'websocket.pool'),
     WriteCapacityUnits(1),
     ReadCapacityUnits(1)
 ]

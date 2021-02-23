@@ -71,7 +71,6 @@ class MyHandler extends WebsocketHandler
                     $pools = $this->spark->scan(WebsocketPool::class);
                     /* @var $pool WebsocketPool */
                     foreach ($pools as $pool){
-//                        $connectionId = $item['connectionId']->getS();
                         $connectionId = $pool->getConnectionId();
                         $client = SimpleWebsocketClient::create(
                             $pool->getApiId(),
@@ -82,19 +81,6 @@ class MyHandler extends WebsocketHandler
                         $status = $client->status($connectionId);
                         echo json_encode($status->toArray());
                     }
-//                    foreach ($dynamoDb->scan([
-//                         'TableName' => 'websocket.pool',
-//                    ])->getItems() as $item) {
-//                        $connectionId = $item['connectionId']->getS();
-//                        $client = SimpleWebsocketClient::create(
-//                            $item['apiId']->getS(),
-//                            $item['region']->getS(),
-//                            $item['stage']->getS()
-//                        );
-//                        $client->message($connectionId, 'pong');
-//                        $status = $client->status($connectionId);
-//                        echo json_encode($status->toArray());
-//                    }
                 }
 
                 return new HttpResponse('message');
