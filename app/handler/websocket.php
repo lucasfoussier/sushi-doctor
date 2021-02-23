@@ -59,45 +59,42 @@ class MyHandler extends WebsocketHandler
                 $websocketPool->setRegion($this->region);
                 $websocketPool->setStage($event->getStage());
                 $this->spark->putItem($websocketPool);
-//                $dynamoDb->putItem(new PutItemInput([
-//                    'TableName' => 'websocket.pool',
-//                    'Item' => [
-//                        'connectionId' => new AttributeValue(['S' => $event->getConnectionId()]),
-//                        'apiId' => new AttributeValue(['S' => $event->getApiId()]),
-//                        'region' => new AttributeValue(['S' => $event->getRegion()]),
-//                        'stage' => new AttributeValue(['S' => $event->getStage()]),
-//                    ],
-//                ]));
                 return new HttpResponse('connect');
             case 'DISCONNECT':
                 $currentPool = $this->spark->getItem(WebsocketPool::class, [
                     'connectionId' => $event->getConnectionId(),
                 ]);
                 $this->spark->deleteItem($currentPool);
-//                $dynamoDb->deleteItem([
-//                    'TableName' => 'websocket.pool',
-//                    'Key' => [
-//                        'connectionId' => [
-//                            'S' => $event->getConnectionId(),
-//                        ],
-//                    ]
-//                ]);
                 return new HttpResponse('disconnect');
             default:
                 if ($event->getBody() === 'ping') {
-                    foreach ($dynamoDb->scan([
-                         'TableName' => 'websocket.pool',
-                    ])->getItems() as $item) {
-                        $connectionId = $item['connectionId']->getS();
+                    $pools = $this->spark->scan(WebsocketPool::class);
+                    /* @var $pool WebsocketPool */
+                    foreach ($pools as $pool){
+//                        $connectionId = $item['connectionId']->getS();
+                        $connectionId = $pool->getConnectionId();
                         $client = SimpleWebsocketClient::create(
-                            $item['apiId']->getS(),
-                            $item['region']->getS(),
-                            $item['stage']->getS()
+                            $pool->getApiId(),
+                            $pool->getRegion(),
+                            $pool->getStage()
                         );
                         $client->message($connectionId, 'pong');
                         $status = $client->status($connectionId);
                         echo json_encode($status->toArray());
                     }
+//                    foreach ($dynamoDb->scan([
+//                         'TableName' => 'websocket.pool',
+//                    ])->getItems() as $item) {
+//                        $connectionId = $item['connectionId']->getS();
+//                        $client = SimpleWebsocketClient::create(
+//                            $item['apiId']->getS(),
+//                            $item['region']->getS(),
+//                            $item['stage']->getS()
+//                        );
+//                        $client->message($connectionId, 'pong');
+//                        $status = $client->status($connectionId);
+//                        echo json_encode($status->toArray());
+//                    }
                 }
 
                 return new HttpResponse('message');
