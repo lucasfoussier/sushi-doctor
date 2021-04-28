@@ -50,7 +50,7 @@ functions:
   worker:
     handler: bin/consumer.php
     timeout: 20
-    reservedConcurrency: 5
+    reservedConcurrency: 1 # TODO add env var
     layers:
       - ${bref:layer.php-80}
     events:
